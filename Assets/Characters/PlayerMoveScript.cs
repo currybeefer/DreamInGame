@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerMoveScript : MonoBehaviour
+public class PlayerMoveScript : MonoBehaviourPun
 {
     // Speed of movement
     public float moveSpeed = 3;
@@ -16,6 +17,10 @@ public class PlayerMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        {
+            return;
+        }
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector2 pos = transform.position;
