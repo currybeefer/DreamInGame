@@ -1,0 +1,1 @@
+Player Prefab位于Photon/PhotonUnityNetworking/Resource文件夹中
