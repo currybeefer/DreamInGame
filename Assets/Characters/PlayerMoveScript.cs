@@ -2,16 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class PlayerMoveScript : MonoBehaviourPun
 {
     // Speed of movement
     public float moveSpeed = 3;
 
+    public Text nameText;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (photonView.IsMine)
+        {
+            nameText.text = PhotonNetwork.NickName;
+        } else
+        {
+            nameText.text = photonView.Owner.NickName;
+        }
     }
 
     // Update is called once per frame
