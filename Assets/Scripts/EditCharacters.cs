@@ -14,6 +14,7 @@ public class EditCharacters : MonoBehaviour
     public Toggle Murderer;
     public InputField Name;
     public InputField Story;
+    public GameObject CharacterTag;
 
     //[HideInInspector]
     public List<CharacterInfo> CharacterInfos;
@@ -23,6 +24,7 @@ public class EditCharacters : MonoBehaviour
     public void Start()
     {
         CharacterInfos = new List<CharacterInfo>();
+        CharacterInfos.Clear();
     }
 
     public void NextButton()
@@ -64,5 +66,24 @@ public class EditCharacters : MonoBehaviour
 
         CharacterUI.SetActive(false);
         CharactersUI.SetActive(true);
+
+        //Update UI
+        int idx = CharacterInfos.Count - 1;
+        Vector3 pos = new Vector3(-6, 1.5f, 0);
+        pos.x += 2 * (idx % 7);
+        if (idx >= 7)
+        {
+            pos.y = -1;
+        }
+        GameObject cur = Instantiate(CharacterTag, pos, Quaternion.identity, CharactersUI.transform);
+        Text text = cur.GetComponentInChildren(typeof(Text)) as Text;
+        text.text = name;
+    }
+
+    public void DeleteButton()
+    {
+        CharacterInfos.Remove(curCharacter_);
+        CharactersUI.SetActive(true);
+        CharacterUI.SetActive(false);
     }
 }
