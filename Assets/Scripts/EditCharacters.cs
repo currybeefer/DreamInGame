@@ -61,8 +61,8 @@ public class EditCharacters : MonoBehaviour
         }
 
         int idx = CharacterPanels.Count;
-        Vector3 pos = new Vector3(-300, 0, 0);
-        pos.x += 100 * idx;
+        Vector3 pos = new Vector3(-320, 0, 0);
+        pos.x += 80 * idx;
         GameObject cur = Instantiate(CharacterTag, CharactersUI.transform);
         cur.transform.localPosition = pos;
         curPanel = cur.GetComponent(typeof(CharacterPanel)) as CharacterPanel;
@@ -109,7 +109,7 @@ public class EditCharacters : MonoBehaviour
     {
         for(int i =0; i < CharacterPanels.Count; i++)
         {
-            Vector3 pos = new Vector3(-400 + 100 * i, 0, 0);
+            Vector3 pos = new Vector3(-320 + 80 * i, 0, 0);
             CharacterPanels[i].transform.localPosition = pos;
         }
     }
