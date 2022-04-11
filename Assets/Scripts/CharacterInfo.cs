@@ -19,6 +19,9 @@ public class CharacterInfo
     public CharacterInfo()
     {
         Debug.Log("Character created");
+        name_ = "";
+        story_ = "";
+        identity_ = IdentityType.Suspect;
     }
 
     public CharacterInfo(string name, IdentityType identity, string story)
