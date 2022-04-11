@@ -10,6 +10,7 @@ public class EditCharacters : MonoBehaviour
     //UI
     public GameObject CharactersUI;
     public GameObject CharacterUI;
+    public GameObject MapUI;
     public Toggle Detective;
     public Toggle Suspect;
     public Toggle Murderer;
@@ -49,6 +50,7 @@ public class EditCharacters : MonoBehaviour
     {
         CharactersUI.SetActive(false);
         CharacterUI.SetActive(false);
+        MapUI.SetActive(true);
     }
 
     public void AddButton()
@@ -59,7 +61,7 @@ public class EditCharacters : MonoBehaviour
         }
 
         int idx = CharacterPanels.Count;
-        Vector3 pos = new Vector3(-400, 0, 0);
+        Vector3 pos = new Vector3(-300, 0, 0);
         pos.x += 100 * idx;
         GameObject cur = Instantiate(CharacterTag, CharactersUI.transform);
         cur.transform.localPosition = pos;
