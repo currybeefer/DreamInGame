@@ -294,7 +294,6 @@ MonoBehaviour:
   Name: {fileID: 878087541}
   Story: {fileID: 2013068370}
   CharacterTag: {fileID: 6021680419103680369, guid: f2325c71d6c53cd42a6a797829c151a6, type: 3}
-  CharacterInfos: []
   CharacterPanels: []
   curPanel: {fileID: 0}
 --- !u!4 &239930283
@@ -438,11 +437,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 800, y: 450}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -459,7 +458,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2113716290}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
