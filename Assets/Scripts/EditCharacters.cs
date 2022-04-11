@@ -21,7 +21,6 @@ public class EditCharacters : MonoBehaviour
     public static EditCharacters Instance;
 
     //Infos
-    public List<CharacterInfo> CharacterInfos;
     public List<CharacterPanel> CharacterPanels;
     [HideInInspector]
     public CharacterInfo curCharacter_;
@@ -33,8 +32,6 @@ public class EditCharacters : MonoBehaviour
 
     void Start()
     {
-        CharacterInfos = new List<CharacterInfo>();
-        CharacterInfos.Clear();
 
         CharacterPanels = new List<CharacterPanel>();
     }
