@@ -8,6 +8,7 @@ public class EditMapLogic : MonoBehaviour
     public GameObject ObjectLoopScroll;
     public GameObject CharacterUI;
     public GameObject MapUI;
+    public GameObject GameUI;
     public void MapButton()
     {
         MapLoopScroll.SetActive(true);
@@ -24,5 +25,11 @@ public class EditMapLogic : MonoBehaviour
     {
         MapUI.SetActive(false);
         CharacterUI.SetActive(true);
+    }
+
+    public void NextButton()
+    {
+        MapUI.SetActive(false);
+        GameUI.SetActive(true);
     }
 }
