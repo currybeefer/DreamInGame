@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EditMapLogic : MonoBehaviour
 {
-    public GameObject MapScrollBar;
-    public GameObject ObjectScrollBar;
+    public GameObject MapLoopScroll;
+    public GameObject ObjectLoopScroll;
     public GameObject CharacterUI;
     public GameObject MapUI;
     public void MapButton()
     {
-        MapScrollBar.SetActive(true);
-        ObjectScrollBar.SetActive(false);
+        MapLoopScroll.SetActive(true);
+        ObjectLoopScroll.SetActive(false);
     }
 
     public void ObjectButton()
     {
-        MapScrollBar.SetActive(false);
-        ObjectScrollBar.SetActive(true);
+        MapLoopScroll.SetActive(false);
+        ObjectLoopScroll.SetActive(true);
     }
 
     public void BackButton()
