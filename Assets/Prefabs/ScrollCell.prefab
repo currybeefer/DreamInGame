@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 11487888}
   - component: {fileID: 11439716}
   - component: {fileID: 11464570}
+  - component: {fileID: 4967507326963503159}
   m_Layer: 5
   m_Name: ScrollCell
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 66efb24ed46044ab8a039599cbc47d7b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -200,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11487888}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4967507326963503159}
+        m_TargetAssemblyTypeName: ChangeBackground, Assembly-CSharp
+        m_MethodName: BackgroundButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 183744}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &11464570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +234,15 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &4967507326963503159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953d62a2936b75d4ea22f831b54fc00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
