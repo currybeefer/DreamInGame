@@ -11,12 +11,14 @@ public class EditMapLogic : MonoBehaviour
     public GameObject MapUI;
     public GameObject GameUI;
     public GameObject Background;
+    public GameObject TempImage;
 
     private Vector3 MouseIniPos;
     private bool Drag = false;
 
     void Update()
     {
+        //Drag Background
         if (MapUI.activeSelf)
         {
             if (Input.GetMouseButtonDown(1))
@@ -36,6 +38,12 @@ public class EditMapLogic : MonoBehaviour
                 Background.transform.position += diff;
                 MouseIniPos = Input.mousePosition;
             }
+        }
+
+        //Put Object
+        if (Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
+        {
+            Debug.Log("Put");
         }
     }
 
@@ -62,5 +70,11 @@ public class EditMapLogic : MonoBehaviour
     {
         MapUI.SetActive(false);
         GameUI.SetActive(true);
+    }
+
+    public void ClearObjectTempImage()
+    {
+        TempImage.GetComponent<Image>().sprite = null;
+        TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
     }
 }

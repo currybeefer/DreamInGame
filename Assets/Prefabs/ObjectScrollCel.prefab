@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 11487888}
   - component: {fileID: 11439716}
   - component: {fileID: 11464570}
-  - component: {fileID: 4967507326963503159}
+  - component: {fileID: 2748164437508802423}
   m_Layer: 5
-  m_Name: ScrollCell
+  m_Name: ObjectScrollCel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,9 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4967507326963503159}
-        m_TargetAssemblyTypeName: ChangeBackground, Assembly-CSharp
-        m_MethodName: BackgroundButton
+      - m_Target: {fileID: 2748164437508802423}
+        m_TargetAssemblyTypeName: AddObject, Assembly-CSharp
+        m_MethodName: AddObjectButton
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 183744}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &4967507326963503159
+--- !u!114 &2748164437508802423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,6 +243,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 183744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 953d62a2936b75d4ea22f831b54fc00c, type: 3}
+  m_Script: {fileID: 11500000, guid: d92d3a2a7f01b524aa72c831fd0abded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

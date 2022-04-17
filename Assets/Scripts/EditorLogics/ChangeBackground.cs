@@ -7,7 +7,7 @@ public class ChangeBackground : MonoBehaviour
 {
     public void BackgroundButton(GameObject currentScrollCell)
     {
-        GameObject Background = currentScrollCell.transform.parent.parent.parent.GetChild(0).gameObject;
+        GameObject Background = currentScrollCell.transform.parent.parent.parent.GetChild(0).GetChild(0).gameObject;
         Image BackgroundImage = Background.GetComponent<Image>();
         BackgroundImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
         BackgroundImage.color = Color.white;
