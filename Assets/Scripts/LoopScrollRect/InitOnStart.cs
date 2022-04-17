@@ -11,8 +11,6 @@ namespace Demo
     {
         public GameObject item;
         public int totalCount = -1;
-
-        public Object resPath;
         private Sprite[] resList;
 
         // Implement your own Cache Pool here. The following is just for example.
@@ -46,7 +44,6 @@ namespace Demo
         void Start()
         {
             var ls = GetComponent<LoopScrollRect>();
-            string resPathStr = resPath.ToString();
             if (this.gameObject.name.Contains("Map"))
             {
                 resList = Resources.LoadAll<Sprite>("Maps");
