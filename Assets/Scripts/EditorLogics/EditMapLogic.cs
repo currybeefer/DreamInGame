@@ -10,43 +10,7 @@ public class EditMapLogic : MonoBehaviour
     public GameObject CharacterUI;
     public GameObject MapUI;
     public GameObject GameUI;
-    public GameObject Background;
     public GameObject TempImage;
-
-    private Vector3 MouseIniPos;
-    private bool Drag = false;
-
-    void Update()
-    {
-        //Drag Background
-        if (MapUI.activeSelf)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                MouseIniPos = Input.mousePosition;
-                Drag = true;
-            }
-
-            if (Input.GetMouseButtonUp(1))
-            {
-                Drag = false;
-            }
-
-            if (Drag)
-            {
-                Vector3 diff = Input.mousePosition - MouseIniPos;
-                Background.transform.position += diff;
-                MouseIniPos = Input.mousePosition;
-            }
-        }
-
-        //Put Object
-        if (Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
-        {
-            Debug.Log("Put");
-        }
-    }
-
 
     public void MapButton()
     {
