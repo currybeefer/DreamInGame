@@ -11,12 +11,8 @@ public class EditCharacters : MonoBehaviour
     public GameObject CharactersUI;
     public GameObject CharacterUI;
     public GameObject MapUI;
-    public Toggle Detective;
-    public Toggle Suspect;
-    public Toggle Murderer;
-    public TMP_InputField Name;
-    public TMP_InputField Story;
     public GameObject CharacterTag;
+    public GameObject Add;
 
     //Singleton
     public static EditCharacters Instance;
@@ -24,17 +20,18 @@ public class EditCharacters : MonoBehaviour
     //Infos
     public List<CharacterPanel> CharacterPanels;
     [HideInInspector]
-    public CharacterInfo curCharacter_;
+    public CharacterInfo curCharacter;
     [HideInInspector]
     public CharacterPanel curPanel;
-    //Others
-    private int initialXPos = -400;
+    
     private int maxCharacters = 8;
 
     void Start()
     {
 
         CharacterPanels = new List<CharacterPanel>();
+        Vector3 pos = new Vector3(-320, 0, 0);
+        Add.transform.localPosition = pos;
     }
 
     void Awake()
@@ -65,44 +62,17 @@ public class EditCharacters : MonoBehaviour
         pos.x += 80 * idx;
         GameObject cur = Instantiate(CharacterTag, CharactersUI.transform);
         cur.transform.localPosition = pos;
+        Vector3 addPos = new Vector3(-320 + 80 * (idx + 1), 0, 0);
+        Add.transform.localPosition = addPos;
         curPanel = cur.GetComponent(typeof(CharacterPanel)) as CharacterPanel;
         CharacterPanels.Add(curPanel);
         SwitchToCharacter();
-
-
     }
 
-    public void SaveButton()
-    {
-        CharacterInfo.IdentityType identity;
-        if (Detective.isOn)
-        {
-            identity = CharacterInfo.IdentityType.Detective;
-        } else if (Suspect.isOn)
-        {
-            identity = CharacterInfo.IdentityType.Suspect;
-        } else
-        {
-            identity = CharacterInfo.IdentityType.Murder;
-        }
-        curCharacter_.SetIdentity(identity);
-        string name = Name.text;
-        string story = Story.text;
-
-        curCharacter_.SetName(name);
-        curCharacter_.SetStory(story);
-
-        curPanel.name.text = name;
-        SwitchToCharacters();
-    }
-
-    public void DeleteButton()
-    {
-        CharacterPanels.Remove(curPanel);
-        Destroy(curPanel.gameObject);
+    public void DeleteButton(CharacterPanel panel){
+        CharacterPanels.Remove(panel);
+        Destroy(panel.gameObject);
         RePosition();
-        
-        SwitchToCharacters();
     }
 
     public void RePosition()
@@ -112,32 +82,18 @@ public class EditCharacters : MonoBehaviour
             Vector3 pos = new Vector3(-320 + 80 * i, 0, 0);
             CharacterPanels[i].transform.localPosition = pos;
         }
+        Vector3 addPos = new Vector3(-320 + 80 * CharacterPanels.Count, 0, 0);
+        Add.transform.localPosition = addPos;
+        
     }
 
     public void SwitchToCharacter()
     {
-        curCharacter_ = curPanel.info;
-        Name.text = curCharacter_.GetName();
-        Story.text = curCharacter_.GetStory();
-        CharacterInfo.IdentityType identity = curCharacter_.GetIdentity();
-        Detective.SetIsOnWithoutNotify(false);
-        Suspect.SetIsOnWithoutNotify(false);
-        Murderer.SetIsOnWithoutNotify(false);
-        if (identity == CharacterInfo.IdentityType.Detective)
-        {
-            Detective.SetIsOnWithoutNotify(true);
-
-
-        } else if(identity == CharacterInfo.IdentityType.Suspect)
-        {
-            Suspect.SetIsOnWithoutNotify(true);
-        }
-        else
-        {
-            Murderer.SetIsOnWithoutNotify(true);
-        }
+        curCharacter = curPanel.info;
+        CharacterEditor characterEditor = CharacterUI.GetComponent<CharacterEditor>();
         CharactersUI.SetActive(false);
         CharacterUI.SetActive(true);
+        characterEditor.onActive(curCharacter);
     }
 
     public void SwitchToCharacters()

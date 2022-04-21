@@ -10,15 +10,29 @@ public class CharacterPanel : MonoBehaviour
     public CharacterInfo info;
     public Button btn;
     public TMP_Text name;
+    public Image identityDisplay;
     // Start is called before the first frame update
-    void Awake()
-    {
-        btn.onClick.AddListener(() =>
-        {
-            EditCharacters editor = EditCharacters.Instance;
-            editor.curPanel = this;
-            editor.SwitchToCharacter();
-        });
+    // void Start()
+    // {
+    //     btn.onClick.AddListener(() =>
+    //     {
+    //         EditCharacters editor = EditCharacters.Instance;
+    //         editor.curPanel = this;
+    //         editor.SwitchToCharacter();
+    //     });
+    // }
+
+    public void OnClick(){
+        EditCharacters editor = EditCharacters.Instance;
+        editor.curPanel = this;
+        editor.SwitchToCharacter();
     }
+
+    public void Delete(){
+        EditCharacters editor = EditCharacters.Instance;
+        editor.DeleteButton(this);
+    }
+
+
 
 }

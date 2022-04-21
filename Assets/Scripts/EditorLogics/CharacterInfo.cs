@@ -9,7 +9,7 @@ public class CharacterInfo
     public enum IdentityType
     {
         Detective,
-        Murder,
+        Murderer,
         Suspect
     }
     private string name_;
