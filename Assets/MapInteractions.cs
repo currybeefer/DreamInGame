@@ -25,6 +25,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool Dragging = false;
     private Vector3 MouseIniPos;
     private bool[,] collideMap;
+    
 
     private void Start()
     {
@@ -83,6 +84,14 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         Vector2 mousePos = Input.mousePosition;
         return mousePos;
     }
+
+
+
+
+
+
+
+
 
     public void AddCollideObj(GameObject obj)
     {
