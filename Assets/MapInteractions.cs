@@ -21,10 +21,11 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
      */
     public int ObjectType = -1;
 
-
+    private int ColliderSize = 20;
     private bool Dragging = false;
     private Vector3 MouseIniPos;
     private bool[,] collideMap;
+    private List<GameObject> colliders = new List<GameObject>();
     
 
     private void Start()
@@ -65,7 +66,8 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         } else if (ObjectType == 1)
         {
             GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
-            AddedObject.transform.position = Input.mousePosition;
+            colliders.Add(AddedObject);
+            AddedObject.transform.localPosition = AddCollider();
         }
     }
 
@@ -76,55 +78,28 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         //Set the Collide Map
         Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
-        collideMap = new bool[Mathf.CeilToInt(map_size.x / 20), Mathf.CeilToInt(map_size.y / 20)];
+        collideMap = new bool[Mathf.CeilToInt(map_size.y / ColliderSize), Mathf.CeilToInt(map_size.x / ColliderSize)];
+        for (int i = 0; i < colliders.Count; i++)
+        {
+            Destroy(colliders[i]);
+        }
+        colliders.Clear();
     }
 
     public Vector2 AddCollider()
     {
-        Vector2 mousePos = Input.mousePosition;
-        return mousePos;
-    }
-
-
-
-
-
-
-
-
-
-    public void AddCollideObj(GameObject obj)
-    {
-        GameObject Temp = obj.transform.parent.GetChild(0).GetChild(1).gameObject;
-        Image TempImage = Temp.GetComponent<Image>();
-        //TODO 这里需要用sprite.create新建一张红色图片，长宽按照pixel来
-        TempImage.sprite = obj.GetComponent<Image>().sprite;
-        TempImage.color = Color.white;
-        TempImage.rectTransform.sizeDelta = obj.GetComponent<Image>().sprite.textureRect.size;
-    }
-    
-    //TODO 仿照OnPointerDown编写插表示碰撞的红色图片的函数
-
-    private float posXForInsertImage;
-    private float posYForInsertImage;
-    public void SetCollide()
-    {
-        const int collideMapSize = 20;
-        bool[,] collideMap = new bool[collideMapSize,collideMapSize];
         Vector3 mousePos = TempImage.transform.localPosition;
         Vector3 mapPos = GetMapPosition();
         float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
-        float pixelOfWidth = mapWidth / collideMapSize;
-        float pixelOfHeight = mapHeight / collideMapSize;
-        int indexOfWidth = Mathf.CeilToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth/2)) / pixelOfWidth);
+        int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / ColliderSize);
         //y坐标轴指向屏幕上方，但是数组的下标越往下越大，所以用加
-        int indexOfHeight = Mathf.CeilToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight/2)) / pixelOfHeight);
+        int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / ColliderSize);
+        collideMap[indexOfHeight, indexOfWidth] = true;
 
-        posXForInsertImage = (mapPos.x - mapWidth/2) + (indexOfWidth - 1) * pixelOfWidth + pixelOfWidth / 2;
-        posYForInsertImage = (mapPos.y + mapHeight/2) - (indexOfHeight - 1) * pixelOfHeight - pixelOfHeight / 2;
-        Debug.Log("x坐标" + posXForInsertImage + ",y坐标" + posYForInsertImage);
-        
-        collideMap[indexOfWidth - 1, indexOfHeight - 1] = true;
+        float posOfWidth = -mapWidth / 2 + indexOfWidth * ColliderSize + 10;
+        float posOfHeight = mapHeight / 2 - indexOfHeight * ColliderSize - 10;
+
+        return new Vector2(posOfWidth, posOfHeight);
     }
 
     public Vector3 GetMapPosition()

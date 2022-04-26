@@ -11,6 +11,7 @@ public class EditMapLogic : MonoBehaviour
     public GameObject MapUI;
     public GameObject GameUI;
     public GameObject TempImage;
+    public GameObject ColliderImage;
     public GameObject CollideMap;
     public GameObject Background;
 
@@ -34,6 +35,9 @@ public class EditMapLogic : MonoBehaviour
         MapLoopScroll.SetActive(false);
         ObjectLoopScroll.SetActive(false);
         CollideMap.SetActive(true);
+        TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
+        TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
+        TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
         Background.GetComponent<MapInteractions>().ObjectType = 1;
     }
 

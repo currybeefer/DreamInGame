@@ -10,18 +10,6 @@ public class CharacterEditor : MonoBehaviour
     public IdentityEditor identityEditor;
     public StoryEditor storyEditor;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void onActive(CharacterInfo info){
         identityEditor.gameObject.SetActive(true);
         storyEditor.gameObject.SetActive(false);

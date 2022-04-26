@@ -1009,6 +1009,7 @@ MonoBehaviour:
   MapUI: {fileID: 2056960901}
   GameUI: {fileID: 355232186}
   TempImage: {fileID: 1402471913}
+  ColliderImage: {fileID: 1790597903611494058, guid: 1121cff893dfc6143a1b9028af16dd6f, type: 3}
   CollideMap: {fileID: 1909702796}
   Background: {fileID: 274828760}
 --- !u!4 &153682277
@@ -5306,18 +5307,6 @@ MonoBehaviour:
       - m_Target: {fileID: 153682276}
         m_TargetAssemblyTypeName: EditMapLogic, Assembly-CSharp
         m_MethodName: CollideButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 153682276}
-        m_TargetAssemblyTypeName: EditMapLogic, Assembly-CSharp
-        m_MethodName: ClearObjectTempImage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
