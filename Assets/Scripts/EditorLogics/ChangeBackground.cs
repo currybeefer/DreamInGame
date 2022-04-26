@@ -12,5 +12,6 @@ public class ChangeBackground : MonoBehaviour
         BackgroundImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
         BackgroundImage.color = Color.white;
         BackgroundImage.rectTransform.sizeDelta = currentScrollCell.GetComponent<Image>().sprite.textureRect.size;
+        Background.GetComponent<MapInteractions>().SetMap();
     }
 }

@@ -11,17 +11,30 @@ public class EditMapLogic : MonoBehaviour
     public GameObject MapUI;
     public GameObject GameUI;
     public GameObject TempImage;
+    public GameObject CollideMap;
+    public GameObject Background;
 
     public void MapButton()
     {
         MapLoopScroll.SetActive(true);
+        CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(false);
     }
 
     public void ObjectButton()
     {
         MapLoopScroll.SetActive(false);
+        CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(true);
+        Background.GetComponent<MapInteractions>().ObjectType = 0;
+    }
+
+    public void CollideButton()
+    {
+        MapLoopScroll.SetActive(false);
+        ObjectLoopScroll.SetActive(false);
+        CollideMap.SetActive(true);
+        Background.GetComponent<MapInteractions>().ObjectType = 1;
     }
 
     public void BackButton()
@@ -41,4 +54,6 @@ public class EditMapLogic : MonoBehaviour
         TempImage.GetComponent<Image>().sprite = null;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
     }
+
+    
 }

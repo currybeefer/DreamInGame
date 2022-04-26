@@ -11,17 +11,33 @@ using Image = UnityEngine.UI.Image;
 public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public GameObject Background;
+    public GameObject CollideMap;
     public GameObject TempImage;
     public GameObject ObjectPrefab;
+    public GameObject ColliderImage;
+    /**
+     * 0 represent object
+     * 1 represent collider
+     */
+    public int ObjectType = -1;
+
 
     private bool Dragging = false;
     private Vector3 MouseIniPos;
+    private bool[,] collideMap;
+
+    private void Start()
+    {
+        SetMap();
+    }
+
     void Update()
     {
         if (Dragging)
         {
             Vector3 diff = Input.mousePosition - MouseIniPos;
             Background.transform.position += diff;
+            CollideMap.transform.position += diff;
             MouseIniPos = Input.mousePosition;
         }
     }
@@ -38,19 +54,36 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             MouseIniPos = Input.mousePosition;
             Dragging = true;
-        } else if (Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
+        } else if (ObjectType == 0 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
             Image curImage = TempImage.GetComponent<Image>();
-            //SetCollide();
             GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
             AddedObject.transform.position = Input.mousePosition;
-            //Vector3 position = new Vector3(posXForInsertImage, posYForInsertImage, Input.mousePosition.z);
-            //AddedObject.transform.position = position;
             AddedObject.GetComponent<Image>().sprite = curImage.sprite;
             AddedObject.GetComponent<Image>().rectTransform.sizeDelta = curImage.sprite.textureRect.size;
+        } else if (ObjectType == 1)
+        {
+            GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
+            AddedObject.transform.position = Input.mousePosition;
         }
     }
-    
+
+    /**
+     * Set MyMap after changing background
+     */
+    public void SetMap()
+    {
+        //Set the Collide Map
+        Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
+        collideMap = new bool[Mathf.CeilToInt(map_size.x / 20), Mathf.CeilToInt(map_size.y / 20)];
+    }
+
+    public Vector2 AddCollider()
+    {
+        Vector2 mousePos = Input.mousePosition;
+        return mousePos;
+    }
+
     public void AddCollideObj(GameObject obj)
     {
         GameObject Temp = obj.transform.parent.GetChild(0).GetChild(1).gameObject;

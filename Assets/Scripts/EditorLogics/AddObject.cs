@@ -8,7 +8,7 @@ public class AddObject : MonoBehaviour
     // Start is called before the first frame update
     public void AddObjectButton(GameObject currentScrollCell)
     {
-        GameObject Temp = currentScrollCell.transform.parent.parent.parent.GetChild(0).GetChild(1).gameObject;
+        GameObject Temp = currentScrollCell.transform.parent.parent.parent.GetChild(0).GetChild(2).gameObject;
         Image TempImage = Temp.GetComponent<Image>();
         TempImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
         TempImage.color = Color.white;
