@@ -20,6 +20,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public GameObject TempImage;
     public GameObject ObjectPrefab;
     public GameObject ColliderImage;
+    public GameObject Message;
     /**
      * 0 represent object
      * 1 represent collider
@@ -31,10 +32,12 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool Dragging = false;
     private Vector3 MouseIniPos;
 
+    //碰撞体
     private int ColliderSize = 20;
     private bool[,] collideMap;
     private List<GameObject> colliders = new List<GameObject>();
 
+    //物品
     private List<GameObject> objects = new List<GameObject>();
 
     private void Start()
@@ -142,6 +145,8 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         AddedObject.transform.position = Input.mousePosition;
         AddedObject.GetComponent<Image>().sprite = curImage.sprite;
         AddedObject.GetComponent<Image>().rectTransform.sizeDelta = curImage.sprite.textureRect.size;
+        //TODO: 将物品的message替换为message输入框中的文字
+        AddedObject.GetComponent<ObjectScript>().message = "";
         objects.Add(AddedObject);
     }
 

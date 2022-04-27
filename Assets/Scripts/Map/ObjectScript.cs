@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class ObjectScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject CurrentObject;
+    public string message = null;
     // Start is called before the first frame update
     public void OnPointerClick(PointerEventData eventData)
     {
