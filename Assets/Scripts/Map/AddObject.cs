@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * 滑动列表中的物品按钮
+ */
 public class AddObject : MonoBehaviour
 {
     // Start is called before the first frame update

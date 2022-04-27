@@ -8,6 +8,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
+/**
+ * µÿÕºΩªª•£∫
+ * ÃÌº”ŒÔ∆∑£¨Õœ∂Øµ»
+ */
+
 public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public GameObject Background;
@@ -21,12 +26,16 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
      */
     public int ObjectType = -1;
 
-    private int ColliderSize = 20;
+
+    
     private bool Dragging = false;
     private Vector3 MouseIniPos;
+
+    private int ColliderSize = 20;
     private bool[,] collideMap;
     private List<GameObject> colliders = new List<GameObject>();
-    
+
+    private List<GameObject> objects = new List<GameObject>();
 
     private void Start()
     {
@@ -35,6 +44,10 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     void Update()
     {
+        if (TempImage.GetComponent<Image>().sprite != null)
+        {
+            TempImage.transform.position = Input.mousePosition;
+        }
         if (Dragging)
         {
             Vector3 diff = Input.mousePosition - MouseIniPos;
@@ -58,17 +71,24 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             Dragging = true;
         } else if (ObjectType == 0 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
-            Image curImage = TempImage.GetComponent<Image>();
-            GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
-            AddedObject.transform.position = Input.mousePosition;
-            AddedObject.GetComponent<Image>().sprite = curImage.sprite;
-            AddedObject.GetComponent<Image>().rectTransform.sizeDelta = curImage.sprite.textureRect.size;
-        } else if (ObjectType == 1)
+            AddObject();
+        } else if (ObjectType == 1 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
-            GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
-            colliders.Add(AddedObject);
-            AddedObject.transform.localPosition = AddCollider();
+             AddCollider();
         }
+    }
+
+    public void ColliderButton()
+    {
+        TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
+        TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
+        TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
+    }
+
+    public void ClearTempImage()
+    {
+        TempImage.GetComponent<Image>().sprite = null;
+        TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
     }
 
     /**
@@ -86,33 +106,61 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         colliders.Clear();
     }
 
-    public Vector2 AddCollider()
+    public void AddCollider()
     {
         Vector3 mousePos = TempImage.transform.localPosition;
         Vector3 mapPos = GetMapPosition();
         float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
         int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / ColliderSize);
-        //yÂùêÊ†áËΩ¥ÊåáÂêëÂ±èÂπï‰∏äÊñπÔºå‰ΩÜÊòØÊï∞ÁªÑÁöÑ‰∏ãÊ†áË∂äÂæÄ‰∏ãË∂äÂ§ßÔºåÊâÄ‰ª•Áî®Âä†
         int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / ColliderSize);
-        collideMap[indexOfHeight, indexOfWidth] = true;
 
         float posOfWidth = -mapWidth / 2 + indexOfWidth * ColliderSize + 10;
         float posOfHeight = mapHeight / 2 - indexOfHeight * ColliderSize - 10;
 
-        return new Vector2(posOfWidth, posOfHeight);
+        GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
+        AddedObject.transform.localPosition = new Vector2(posOfWidth, posOfHeight);
+        colliders.Add(AddedObject);
+        collideMap[indexOfHeight, indexOfWidth] = true;
     }
 
-    public Vector3 GetMapPosition()
+    public void RemoveCollider(GameObject collider)
+    {
+        Vector3 mousePos = TempImage.transform.localPosition;
+        Vector3 mapPos = GetMapPosition();
+        float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
+        int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / ColliderSize);
+        int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / ColliderSize);
+
+        colliders.Remove(collider);
+        collideMap[indexOfHeight, indexOfWidth] = false;
+    }
+
+    public void AddObject()
+    {
+        Image curImage = TempImage.GetComponent<Image>();
+        GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
+        AddedObject.transform.position = Input.mousePosition;
+        AddedObject.GetComponent<Image>().sprite = curImage.sprite;
+        AddedObject.GetComponent<Image>().rectTransform.sizeDelta = curImage.sprite.textureRect.size;
+        objects.Add(AddedObject);
+    }
+
+    public void RemoveObject(GameObject obj)
+    {
+        objects.Remove(obj);
+    }
+
+    private Vector3 GetMapPosition()
     {
         return Background.transform.localPosition;
     }
 
-    public float GetMapWidth()
+    private float GetMapWidth()
     {
         return Background.GetComponent<RectTransform>().rect.width;
     }
     
-    public float GetMapHeight()
+    private float GetMapHeight()
     {
         return Background.GetComponent<RectTransform>().rect.height;
     }

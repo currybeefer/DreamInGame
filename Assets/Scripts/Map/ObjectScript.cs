@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/**
+ * Åö×²Îïprefab
+ */
 public class ObjectScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject CurrentObject;
@@ -11,7 +14,11 @@ public class ObjectScript : MonoBehaviour, IPointerClickHandler
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Destroy(CurrentObject);
+            if (CurrentObject.transform.parent.GetComponent<MapInteractions>().ObjectType == 0)
+            {
+                CurrentObject.transform.parent.GetComponent<MapInteractions>().RemoveObject(CurrentObject);
+                Destroy(CurrentObject);
+            }
         }
     }
 }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Map EditorµÄUI
+ */
 public class EditMapLogic : MonoBehaviour
 {
     public GameObject MapLoopScroll;
@@ -10,8 +13,6 @@ public class EditMapLogic : MonoBehaviour
     public GameObject CharacterUI;
     public GameObject MapUI;
     public GameObject GameUI;
-    public GameObject TempImage;
-    public GameObject ColliderImage;
     public GameObject CollideMap;
     public GameObject Background;
 
@@ -20,6 +21,7 @@ public class EditMapLogic : MonoBehaviour
         MapLoopScroll.SetActive(true);
         CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(false);
+        Background.GetComponent<MapInteractions>().ObjectType = -1;
     }
 
     public void ObjectButton()
@@ -35,9 +37,6 @@ public class EditMapLogic : MonoBehaviour
         MapLoopScroll.SetActive(false);
         ObjectLoopScroll.SetActive(false);
         CollideMap.SetActive(true);
-        TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
-        TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
-        TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
         Background.GetComponent<MapInteractions>().ObjectType = 1;
     }
 
@@ -51,12 +50,6 @@ public class EditMapLogic : MonoBehaviour
     {
         MapUI.SetActive(false);
         GameUI.SetActive(true);
-    }
-
-    public void ClearObjectTempImage()
-    {
-        TempImage.GetComponent<Image>().sprite = null;
-        TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
     }
 
     

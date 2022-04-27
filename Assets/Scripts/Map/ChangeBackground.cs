@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * 滑动列表中的背景按钮
+ */
+
 public class ChangeBackground : MonoBehaviour
 {
     public void BackgroundButton(GameObject currentScrollCell)
