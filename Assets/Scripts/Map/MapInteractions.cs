@@ -7,10 +7,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
+using TMPro;
 
 /**
- * µØÍ¼½»»¥£º
- * Ìí¼ÓÎïÆ·£¬ÍÏ¶¯µÈ
+ * ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
  */
 
 public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -21,6 +22,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public GameObject ObjectPrefab;
     public GameObject ColliderImage;
     public GameObject Message;
+    public GameObject Maps;
     /**
      * 0 represent object
      * 1 represent collider
@@ -32,17 +34,25 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool Dragging = false;
     private Vector3 MouseIniPos;
 
-    //Åö×²Ìå
+    //ï¿½ï¿½×²ï¿½ï¿½
     private int ColliderSize = 20;
     private bool[,] collideMap;
     private List<GameObject> colliders = new List<GameObject>();
 
-    //ÎïÆ·
+    //ï¿½ï¿½Æ·
     private List<GameObject> objects = new List<GameObject>();
 
     private void Start()
     {
         SetMap();
+    }
+
+    void OnEnable(){
+        Image BackgroundImage = Background.GetComponent<Image>();
+        if(BackgroundImage.sprite == null){
+            ChangeBackground selected = Maps.GetComponentInChildren<ChangeBackground>();
+            selected.BackgroundButton(selected.gameObject);
+        }
     }
 
     void Update()
@@ -145,8 +155,8 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         AddedObject.transform.position = Input.mousePosition;
         AddedObject.GetComponent<Image>().sprite = curImage.sprite;
         AddedObject.GetComponent<Image>().rectTransform.sizeDelta = curImage.sprite.textureRect.size;
-        //TODO: ½«ÎïÆ·µÄmessageÌæ»»ÎªmessageÊäÈë¿òÖÐµÄÎÄ×Ö
-        AddedObject.GetComponent<ObjectScript>().message = "";
+        TMP_InputField messageInput = Message.GetComponent<TMP_InputField>();
+        AddedObject.GetComponent<ObjectScript>().message = messageInput.text;
         objects.Add(AddedObject);
     }
 

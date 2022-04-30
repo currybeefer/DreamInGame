@@ -41,7 +41,7 @@ namespace Demo
             img.sprite = resList[idx];
         }
 
-        void Start()
+        void Awake()
         {
             var ls = GetComponent<LoopScrollRect>();
             if (this.gameObject.name.Contains("Map"))

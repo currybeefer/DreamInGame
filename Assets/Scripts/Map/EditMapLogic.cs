@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /**
- * Map EditorµÄUI
+ * Map Editorï¿½ï¿½UI
  */
 public class EditMapLogic : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class EditMapLogic : MonoBehaviour
     public GameObject CollideMap;
     public GameObject Background;
     public GameObject Message;
+    public GameObject MapSelectBg;
+    public GameObject ObjectSelectBg;
 
     public void MapButton()
     {
@@ -24,6 +26,8 @@ public class EditMapLogic : MonoBehaviour
         ObjectLoopScroll.SetActive(false);
         Message.SetActive(false);
         Background.GetComponent<MapInteractions>().ObjectType = -1;
+        MapSelectBg.SetActive(true);
+        ObjectSelectBg.SetActive(false);
     }
 
     public void ObjectButton()
@@ -33,6 +37,8 @@ public class EditMapLogic : MonoBehaviour
         ObjectLoopScroll.SetActive(true);
         Message.SetActive(true);
         Background.GetComponent<MapInteractions>().ObjectType = 0;
+        MapSelectBg.SetActive(false);
+        ObjectSelectBg.SetActive(true);
     }
 
     public void CollideButton()
