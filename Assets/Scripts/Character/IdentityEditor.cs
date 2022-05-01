@@ -20,6 +20,7 @@ public class IdentityEditor : MonoBehaviour
     public Dictionary<String, CharacterInfo.IdentityType> identityTable;
     [HideInInspector]
     public Dictionary<String, Sprite> imageTable;
+    public ButtonGroup btnGroup;
     public Button detectiveButton;
     public Button suspectButton;
     public Button murdererButton;

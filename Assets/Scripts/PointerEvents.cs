@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public class PointerEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerClickHandler
 {
     [Serializable]
-    public class PointerEvent : UnityEvent {}
+    public class PointerEvent : UnityEvent<GameObject> {}
 
     [FormerlySerializedAs("onPointerEnter")]
     [SerializeField]
@@ -47,17 +47,17 @@ public class PointerEvents : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     //UI--------------------------
     public void OnPointerEnter(PointerEventData eventData)
     {
-        m_OnPointerEnter.Invoke();
+        m_OnPointerEnter.Invoke(gameObject);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        m_OnPointerExit.Invoke();
+        m_OnPointerExit.Invoke(gameObject);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        m_OnPointerClick.Invoke();
+        m_OnPointerClick.Invoke(gameObject);
     }
 }
 

@@ -16,15 +16,15 @@ public class CharacterEditor : MonoBehaviour
         CharacterInfo.IdentityType identity = info.GetIdentity();
         if (identity == CharacterInfo.IdentityType.Detective)
         {
-            identityEditor.detectiveButton.Select();
+            identityEditor.btnGroup.Select(identityEditor.detectiveButton.gameObject);
             identityEditor.SelectIdentity("Detective");
         } else if(identity == CharacterInfo.IdentityType.Suspect)
         {
-            identityEditor.suspectButton.Select();
+            identityEditor.btnGroup.Select(identityEditor.suspectButton.gameObject);
             identityEditor.SelectIdentity("Suspect");
         }else
         {
-            identityEditor.murdererButton.Select();
+            identityEditor.btnGroup.Select(identityEditor.murdererButton.gameObject);
             identityEditor.SelectIdentity("Murderer");
         }
         storyEditor.name.text = info.GetName();
