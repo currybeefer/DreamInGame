@@ -13,5 +13,31 @@ namespace EditorLogics
         const int collideMapSize = 20;//这个变量的定义和下面这行数组初始化应该放到map的初始化函数里，目前临时放在这
         //碰撞矩阵
         bool[,] collideMap = new bool[collideMapSize,collideMapSize];
+
+        public String GetBackground()
+        {
+            return background;
+        }
+
+        public List<ObjectData> GetObjects()
+        {
+            return objects;
+        }
+
+        public int GetCollideMapSize()
+        {
+            return collideMapSize;
+        }
+
+        public bool[,] CollideMap
+        {
+            get => collideMap;
+            set => collideMap = value;
+        }
+        
+        public override string ToString()
+        {
+            return string.Format("background: {0},collide_map: {1},object: {2}", background, collideMap, objects);
+        }
     }
 }

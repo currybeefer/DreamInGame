@@ -61,4 +61,9 @@ public class CharacterInfo
         Debug.Log("character " + name_ + " \'s identity updated");
         identity_ = identity;
     }
+    
+    public override string ToString()
+    {
+        return string.Format("name: {0},identity: {1},background: {2}", name_, identity_, story_);
+    }
 }
