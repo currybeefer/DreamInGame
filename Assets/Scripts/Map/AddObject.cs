@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /**
- * »¬¶¯ÁÐ±íÖÐµÄÎïÆ·°´Å¥
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ðµï¿½ï¿½ï¿½Æ·ï¿½ï¿½Å¥
  */
 public class AddObject : MonoBehaviour
 {
     // Start is called before the first frame update
     public void AddObjectButton(GameObject currentScrollCell)
     {
-        GameObject Temp = currentScrollCell.transform.parent.parent.parent.GetChild(0).GetChild(2).gameObject;
+
+        GameObject Temp = MapInteractions.Instance.TempImage;
         Image TempImage = Temp.GetComponent<Image>();
         TempImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
         TempImage.color = Color.white;
         TempImage.rectTransform.sizeDelta = currentScrollCell.GetComponent<Image>().sprite.textureRect.size;
+        MapInteractions.Instance.ObjectType = 0;
+        MapInteractions.Instance.Tools.SelectNone();
     }
 }

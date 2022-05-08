@@ -4,22 +4,38 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /**
- * Åö×²Îïprefab
+ * ï¿½ï¿½×²ï¿½ï¿½prefab
  */
 public class ObjectScript : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject CurrentObject;
     public string message = null;
     // Start is called before the first frame update
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (CurrentObject.transform.parent.GetComponent<MapInteractions>().ObjectType == 0)
-            {
-                CurrentObject.transform.parent.GetComponent<MapInteractions>().RemoveObject(CurrentObject);
-                Destroy(CurrentObject);
+            switch(MapInteractions.Instance.ObjectType){
+                case -1:
+                    ShowInfo();
+                    break;
+                case 2:
+                    Remove();
+                    break;
+                case 3:
+                    Rotate();
+                    break;
+
             }
-        }
+    }
+
+    private void Remove(){
+        MapInteractions.Instance.objects.Remove(gameObject);
+        Destroy(gameObject, 0);
+    }
+
+    private void ShowInfo(){
+
+    }
+
+    private void Rotate(){
+
     }
 }

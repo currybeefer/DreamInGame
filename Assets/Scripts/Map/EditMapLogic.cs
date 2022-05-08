@@ -36,16 +36,13 @@ public class EditMapLogic : MonoBehaviour
         CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(true);
         Message.SetActive(true);
-        Background.GetComponent<MapInteractions>().ObjectType = 0;
+        Background.GetComponent<MapInteractions>().ObjectType = -1;
         MapSelectBg.SetActive(false);
         ObjectSelectBg.SetActive(true);
     }
 
     public void CollideButton()
     {
-        MapLoopScroll.SetActive(false);
-        ObjectLoopScroll.SetActive(false);
-        Message.SetActive(false);
         CollideMap.SetActive(true);
         Background.GetComponent<MapInteractions>().ObjectType = 1;
     }

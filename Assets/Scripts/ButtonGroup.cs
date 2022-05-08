@@ -11,6 +11,8 @@ public class ButtonGroup : MonoBehaviour
     public Color selectedColor;
     public Color highlightedColor;
     public Color normalColor;
+
+    public Button DefaultBtn;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,6 +23,8 @@ public class ButtonGroup : MonoBehaviour
             Exit(btn.gameObject);
             btn.onPointerClick.AddListener(Select);
         }
+        Select(DefaultBtn.gameObject);
+        DefaultBtn.onClick.Invoke();
     }
 
     public void Select(GameObject btn){
@@ -47,6 +51,13 @@ public class ButtonGroup : MonoBehaviour
     public void Exit(GameObject btn){
         Image btnImage = btn.GetComponent<Image>();
         btnImage.color = normalColor;
+    }
+
+    public void SelectNone(){
+        if(curButton){
+            Exit(curButton.gameObject);
+            curButton = null;
+        }
     }
 
 

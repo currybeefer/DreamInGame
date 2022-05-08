@@ -23,11 +23,21 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public GameObject ColliderImage;
     public GameObject Message;
     public GameObject Maps;
+    public Sprite EraserImage;
+    public Sprite RotationImage;
+
+    public ButtonGroup Tools;
     /**
+     * -1 represent normal 
      * 0 represent object
      * 1 represent collider
+     * 2 represent eraser
+     * 3 represents rotation
      */
     public int ObjectType = -1;
+
+    //Singleton
+    public static MapInteractions Instance;
 
 
     
@@ -40,11 +50,21 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private List<GameObject> colliders = new List<GameObject>();
 
     //��Ʒ
-    private List<GameObject> objects = new List<GameObject>();
+    [HideInInspector]
+    public List<GameObject> objects = new List<GameObject>();
 
     private void Start()
     {
         SetMap();
+    }
+
+    void Awake()
+    {
+        if(Instance == null || Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
     }
 
     void OnEnable(){
@@ -178,5 +198,26 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private float GetMapHeight()
     {
         return Background.GetComponent<RectTransform>().rect.height;
+    }
+
+    public void SetToNormal(){
+        ObjectType = -1;
+        ClearTempImage();
+    }
+
+    public void SetToEraser(){
+        ObjectType = 2;
+        ClearTempImage();
+        TempImage.GetComponent<Image>().sprite = EraserImage;
+        TempImage.GetComponent<Image>().color = Color.white;
+        TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+
+    }
+
+    public void SetToRotate(){
+        ObjectType = 3;
+        TempImage.GetComponent<Image>().sprite = RotationImage;
+        TempImage.GetComponent<Image>().color = Color.white;
+        TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
     }
 }
