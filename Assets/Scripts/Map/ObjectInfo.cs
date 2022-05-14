@@ -44,9 +44,9 @@ public class ObjectInfo
         image_ = image;
     }
     
-    public void SetPosition(string position)
+    public void SetPosition(Vector3 position)
     {
-        position_ = position;
+        position_ = "[" + position.x + "," + position.y + "," + position.z + "]";
     }
 
     public void SetMessage(string message)

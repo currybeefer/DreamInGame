@@ -1,15 +1,19 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using LitJson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace EditorLogics
 {
-    public class EditGameManager
+    public class EditorGameManager
     {
         public static void SaveDataJsonFile(MapData mapData,String jsonFilePath)
         {
@@ -37,29 +41,48 @@ namespace EditorLogics
 
         public static void SendJsonByHttpPost(String jsonFilePath)
         {
+            Debug.Log("测试Post");
             String jsonDataPost = ReadJsonFile(jsonFilePath);
-            WWW www = new WWW("http://52.71.182.98/game_info_post/", Encoding.UTF8.GetBytes(jsonDataPost));
+            String url = "https://api.dreamin.land/game_info_post/";
+            Encoding encoding = Encoding.UTF8;
+            byte[] buffer = encoding.GetBytes(jsonDataPost);
+            HttpsPost(url, buffer);
+        }
+        
+        /// <summary>
+        /// HTTPS Post请求
+        /// </summary>
+        /// <param name="URL">访问地址</param>
+        /// <param name="postBytes">携带数据</param>
+        /// <returns></returns>
+        private static void HttpsPost(string url, byte[] postBytes)
+        {
+            UnityWebRequest request = new UnityWebRequest(url, "POST");//method传输方式，默认为Get；
 
-            while (!www.isDone)
+            request.uploadHandler = new UploadHandlerRaw(postBytes);//实例化上传缓存器
+            request.downloadHandler = new DownloadHandlerBuffer();//实例化下载存贮器
+            request.SetRequestHeader("Content-Type", "application/json");//更改内容类型，
+            request.SendWebRequest();//发送请求
+            
+            while (!request.isDone)
             {
                 Debug.Log("wait");
             }
-
-            if (www.error != null)
+            Debug.Log("Status Code: " + request.responseCode);//获得返回值
+            if (request.responseCode == 200)//检验是否成功
             {
-                Debug.LogError(www.error);
+                string text = request.downloadHandler.text;//打印获得值
+                Debug.Log(text);
+       
             }
             else
             {
-                Debug.Log(www.text);
-//取数据1
-                MapData msgJsonRecieve = JsonMapper.ToObject<MapData>(www.text);
-
-                Debug.Log(msgJsonRecieve.ToString());
-//取数据2
-                JsonData jsonDataGet = JsonMapper.ToObject(www.text);
-                Debug.Log(jsonDataGet.ToString());
+                Debug.Log("post失败了");
+                Debug.Log(request.error);
+                Debug.Log(request.responseCode);
             }
         }
+        
+        public bool IsBusy=false;//用于检测是否重复发送
     }
 }

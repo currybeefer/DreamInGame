@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using EditorLogics;
 using TMPro;
 
 public class EditCharacters : MonoBehaviour
 {
+    public static EditorData editorData;
+    public static MapData mapData;
+
     //UI
     public GameObject CharactersUI;
     public GameObject CharacterUI;
@@ -28,7 +32,8 @@ public class EditCharacters : MonoBehaviour
 
     void Start()
     {
-
+        editorData = new EditorData();
+        mapData = new MapData();
         CharacterPanels = new List<CharacterPanel>();
         Vector3 pos = new Vector3(-320, 0, 0);
         Add.transform.localPosition = pos;

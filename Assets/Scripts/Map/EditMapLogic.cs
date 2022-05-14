@@ -60,6 +60,14 @@ public class EditMapLogic : MonoBehaviour
     {
         MapUI.SetActive(false);
         GameUI.SetActive(true);
+        SaveMapData();
+    }
+
+    private void SaveMapData()
+    {
+        EditCharacters.mapData.SetObejcts(MapInteractions.objectInfoList);
+        EditCharacters.mapData.CollideMap = MapInteractions.collideMap;
+        EditCharacters.mapData.SetBackGround(MapInteractions.Background.name);
     }
 
     
