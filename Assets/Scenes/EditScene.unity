@@ -1915,7 +1915,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff704671b68a29a48829fb6e74d44d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Background: {fileID: 274828760}
   CollideMap: {fileID: 1909702796}
   TempImage: {fileID: 1402471913}
   ObjectPrefab: {fileID: 6769360498833883768, guid: bf2ba8537c121d549a744ef9d75bd44f, type: 3}
@@ -10421,6 +10420,7 @@ MonoBehaviour:
   story: {fileID: 498915670}
   identityDisplay: {fileID: 838420053}
   identityEditor: {fileID: 2059609209}
+  CharacterInfoList: []
 --- !u!1 &1909702796
 GameObject:
   m_ObjectHideFlags: 0
