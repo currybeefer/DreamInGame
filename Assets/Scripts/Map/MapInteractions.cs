@@ -50,8 +50,6 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private List<GameObject> colliders = new List<GameObject>();
 
     //��Ʒ
-    [HideInInspector]
-    public List<GameObject> objects = new List<GameObject>();
 
     private void Start()
     {
