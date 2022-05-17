@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using EditorLogics;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,7 @@ using TMPro;
 
 public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public GameObject Background;
+    public static GameObject Background;
     public GameObject CollideMap;
     public GameObject TempImage;
     public GameObject ObjectPrefab;
@@ -46,15 +47,18 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     //��ײ��
     private int ColliderSize = 20;
-    private bool[,] collideMap;
+    public static bool[,] collideMap;
     private List<GameObject> colliders = new List<GameObject>();
 
     //��Ʒ
     private List<GameObject> objects = new List<GameObject>();
+    
+    public static List<ObjectInfo> objectInfoList;
 
     private void Start()
     {
         SetMap();
+        objectInfoList = new List<ObjectInfo>();
     }
 
     void Awake()
@@ -177,6 +181,12 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TMP_InputField messageInput = Message.GetComponent<TMP_InputField>();
         AddedObject.GetComponent<ObjectScript>().message = messageInput.text;
         objects.Add(AddedObject);
+
+        ObjectInfo curObjectInfo = new ObjectInfo();
+        curObjectInfo.SetImage(curImage.sprite.name);
+        curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
+        curObjectInfo.SetPosition(Input.mousePosition);
+        objectInfoList.Add(curObjectInfo);
     }
 
     public void RemoveObject(GameObject obj)

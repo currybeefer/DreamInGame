@@ -1,0 +1,25 @@
+{
+  "name": "string",
+  "end": "string",
+  "length": 0,
+  "map": [
+    {
+      "background": "string",
+      "collide_map": "string",
+      "object": [
+        {
+          "image_link": "string",
+          "position": "string",
+          "message": "string"
+        }
+      ]
+    }
+  ],
+  "character": [
+    {
+      "name": "string",
+      "identity": 0,
+      "background": "string"
+    }
+  ]
+}

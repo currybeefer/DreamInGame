@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using UnityEditor.U2D.Animation;
 
 namespace EditorLogics
 {
-    public class DramaData
+    public class EditorData
     {
         //剧本名称
-        string name = "头号玩家";
+        public string name = "头号玩家";
 
         //剧本情节介绍
-        private string end;
+        public string end;
 
         //
-        int length = 120;
+        public int length = 120;
 
         //角色列表
-        List<CharacterData> Characters; //最多11个
+        public List<CharacterInfo> CharacterInfoList; //最多11个
 
         //地图
-        MapData map;
+        public MapData map;
 
         public override string ToString()
         {
             return string.Format("name: {0},end: {1},length: {2},map: {3},character: {4}", name, end, length, map,
-                Characters);
+                CharacterInfoList);
         }
     }
 }
