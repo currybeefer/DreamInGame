@@ -69,6 +69,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             Destroy(Instance);
         }
         Instance = this;
+        Background = gameObject;
     }
 
     void OnEnable(){
