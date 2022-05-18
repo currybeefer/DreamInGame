@@ -5539,7 +5539,7 @@ MonoBehaviour:
   selectedColor: {r: 0.5764706, g: 0.9137255, b: 0.93333334, a: 1}
   highlightedColor: {r: 0.5764706, g: 0.91372555, b: 0.9333334, a: 1}
   normalColor: {r: 0.5764706, g: 0.91372555, b: 0.9333334, a: 0.43137255}
-  DefaultBtn: {fileID: 0}
+  DefaultBtn: {fileID: 134263486}
 --- !u!1001 &900168653
 PrefabInstance:
   m_ObjectHideFlags: 0
