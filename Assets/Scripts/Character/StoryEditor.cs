@@ -38,7 +38,7 @@ public class StoryEditor : MonoBehaviour
         //每完成一个人物的编辑，向编辑器数据中存储对应的人物信息
         CharacterInfo curCharacterInfo = editor.curCharacter;
         //CharacterInfoList.Add(curCharacterInfo);
-        EditCharacters.editorData.CharacterInfoList.Add(curCharacterInfo);
+        editor.AddInfo();
         
         editor.curPanel.identityDisplay.sprite = identityDisplay.sprite;
         editor.curPanel.name.text = name.text;

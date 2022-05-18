@@ -106,4 +106,8 @@ public class EditCharacters : MonoBehaviour
         CharactersUI.SetActive(true);
         CharacterUI.SetActive(false);
     }
+
+    public void AddInfo(){
+        editorData.CharacterInfoList.Add(curCharacter);
+    }
 }

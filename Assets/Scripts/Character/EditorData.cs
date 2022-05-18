@@ -19,7 +19,7 @@ namespace EditorLogics
         public int length = 120;
 
         //角色列表
-        public List<CharacterInfo> CharacterInfoList; //最多11个
+        public List<CharacterInfo> CharacterInfoList = new List<CharacterInfo>(); //最多11个
 
         //地图
         public MapData map;
