@@ -10,13 +10,13 @@ namespace EditorLogics
     public class EditorData
     {
         //剧本名称
-        public string name = "头号玩家";
+        public string name;
 
         //剧本情节介绍
         public string end;
 
         //
-        public int length = 120;
+        public int length;
 
         //角色列表
         public List<CharacterInfo> CharacterInfoList; //最多11个

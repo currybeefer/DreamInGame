@@ -27,10 +27,15 @@ public class EditGameSettings : MonoBehaviour
         EditCharacters.editorData.name = GameTitle.text;
         EditCharacters.editorData.length = int.Parse(GameTime.text);
         EditCharacters.editorData.end = EndMessage.text;
+        if (EditCharacters.editorData.name == "" && EditCharacters.editorData.length <= 0)
+        {
+            Debug.Log("编辑器数据有误，时间和名字均为空！请检查游戏是否编辑完成。");
+            return;
+        }
         String dataJsonStr = EditCharacters.editorData.ToString();
-        String jsonFilePath = "D:/DreamInGame/test.json";
-        File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
+        //String jsonFilePath = "D:/DreamInGame/test.json";
+        //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
         
-        EditorGameManager.SendJsonByHttpPost(jsonFilePath);
+        EditorGameManager.SendJsonByHttpPost(dataJsonStr);
     }
 }

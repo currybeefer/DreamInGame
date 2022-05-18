@@ -39,10 +39,9 @@ namespace EditorLogics
         }
 
 
-        public static void SendJsonByHttpPost(String jsonFilePath)
+        public static void SendJsonByHttpPost(String jsonDataPost)
         {
-            Debug.Log("测试Post");
-            String jsonDataPost = ReadJsonFile(jsonFilePath);
+            // jsonDataPost = ReadJsonFile(jsonFilePath);
             String url = "https://api.dreamin.land/game_info_post/";
             Encoding encoding = Encoding.UTF8;
             byte[] buffer = encoding.GetBytes(jsonDataPost);
