@@ -17,7 +17,7 @@ using TMPro;
 
 public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public static GameObject Background;
+    public GameObject Background;
     public GameObject CollideMap;
     public GameObject TempImage;
     public GameObject ObjectPrefab;
@@ -40,21 +40,21 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     //Singleton
     public static MapInteractions Instance;
 
-
     
     private bool Dragging = false;
     private Vector3 MouseIniPos;
 
     //��ײ��
-    private int ColliderSize = 20;
-    public static bool[,] collideMap;
+    [HideInInspector]
+    public int ColliderSize = 20;
+    public bool[,] collideMap;
     private List<GameObject> colliders = new List<GameObject>();
 
     //��Ʒ
     [HideInInspector]
     public List<GameObject> objects = new List<GameObject>();
     
-    public static List<ObjectInfo> objectInfoList;
+    public List<ObjectInfo> objectInfoList;
 
     private void Start()
     {

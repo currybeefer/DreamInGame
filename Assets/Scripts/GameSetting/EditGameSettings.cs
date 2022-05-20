@@ -23,11 +23,12 @@ public class EditGameSettings : MonoBehaviour
 
     public void SaveButton()
     {
-        EditCharacters.editorData.map = EditCharacters.mapData;
-        EditCharacters.editorData.name = GameTitle.text;
-        EditCharacters.editorData.length = int.Parse(GameTime.text);
-        EditCharacters.editorData.end = EndMessage.text;
-        String dataJsonStr = EditCharacters.editorData.ToString();
+        EditorData data = EditorData.Instance;
+        data.SetName(GameTitle.text);
+        data.SetEnd(EndMessage.text);
+        data.SetLength(int.Parse(GameTime.text));
+        String dataJsonStr = data.ToString();
+        print(dataJsonStr);
         String jsonFilePath = "D:/DreamInGame/test.json";
         File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
         

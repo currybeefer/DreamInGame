@@ -27,6 +27,9 @@ public class EditCharacters : MonoBehaviour
     public CharacterInfo curCharacter;
     [HideInInspector]
     public CharacterPanel curPanel;
+    [HideInInspector]
+    public List<CharacterInfo> CharacterInfoList;
+
     
     private int maxCharacters = 8;
 
@@ -35,6 +38,7 @@ public class EditCharacters : MonoBehaviour
         editorData = new EditorData();
         mapData = new MapData();
         CharacterPanels = new List<CharacterPanel>();
+        CharacterInfoList = new List<CharacterInfo>();
         Vector3 pos = new Vector3(-320, 0, 0);
         Add.transform.localPosition = pos;
     }
@@ -53,6 +57,7 @@ public class EditCharacters : MonoBehaviour
         CharactersUI.SetActive(false);
         CharacterUI.SetActive(false);
         MapUI.SetActive(true);
+        EditorData.Instance.SetCharacterInfoList(CharacterInfoList);
     }
 
     public void AddButton()
@@ -108,6 +113,6 @@ public class EditCharacters : MonoBehaviour
     }
 
     public void AddInfo(){
-        editorData.CharacterInfoList.Add(curCharacter);
+        CharacterInfoList.Add(curCharacter);
     }
 }

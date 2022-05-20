@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EditorLogics;
 
 /**
  * Map Editor��UI
@@ -62,9 +63,11 @@ public class EditMapLogic : MonoBehaviour
 
     private void SaveMapData()
     {
-        EditCharacters.mapData.SetObejcts(MapInteractions.objectInfoList);
-        EditCharacters.mapData.CollideMap = MapInteractions.collideMap;
-        EditCharacters.mapData.SetBackGround(MapInteractions.Background.name);
+        MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
+        EditorData.Instance.map.SetCollideMap(mapInteractions.collideMap);
+        EditorData.Instance.map.SetCollideMapSize(mapInteractions.ColliderSize);
+        EditorData.Instance.map.SetObejcts(mapInteractions.objectInfoList);
+        EditorData.Instance.map.SetBackground(mapInteractions.GetComponent<Image>().sprite.name);
     }
 
     
