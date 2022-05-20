@@ -64,6 +64,6 @@ public class CharacterInfo
     
     public override string ToString()
     {
-        return string.Format("name: {0},identity: {1},background: {2}", name_, identity_, story_);
+        return string.Format("\"name\": \"{0}\",\"identity\": {1},\"background\": \"{2}\"", name_, (int)identity_, story_);
     }
 }

@@ -29,9 +29,9 @@ public class EditGameSettings : MonoBehaviour
         data.SetLength(int.Parse(GameTime.text));
         String dataJsonStr = data.ToString();
         print(dataJsonStr);
-        String jsonFilePath = "D:/DreamInGame/test.json";
-        File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
+        //String jsonFilePath = "D:/DreamInGame/test.json";
+        //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
         
-        EditorGameManager.SendJsonByHttpPost(jsonFilePath);
+        EditorGameManager.SendJsonByHttpPost(dataJsonStr);
     }
 }

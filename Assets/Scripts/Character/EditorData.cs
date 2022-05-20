@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,8 +29,15 @@ namespace EditorLogics
 
         public override string ToString()
         {
-            return string.Format("name: {0},end: {1},length: {2},map: {3},character: {4}", name, end, length, map,
-                CharacterInfoList);
+            String characterInfoStr = "";
+            for (int i = 0; i < CharacterInfoList.Count; i++)
+            {
+                characterInfoStr += "{" + CharacterInfoList[i].ToString() + "},";
+            }
+            characterInfoStr = characterInfoStr.Substring(0, characterInfoStr.Length - 1);
+            String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"end\": \"{1}\",\"length\": {2},\"map\": [{3}],\"character\": [{4}]", name, end, length, map.ToString(),
+                characterInfoStr) + "}";
+            return editorDataStr;
         }
 
         void Awake(){

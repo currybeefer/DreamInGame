@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
+using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 
 namespace EditorLogics
 {
@@ -55,7 +58,23 @@ namespace EditorLogics
         
         public override string ToString()
         {
-            return string.Format("background: {0},collide_map: {1},object: {2}", background, collideMap, objects);
+            String collideMapStr = "",objectsStr = "";
+            for (int i=0; i < collideMap.GetLength(0); i++)
+            {
+                for (int j = 0; j < collideMap.GetLength(1); j++)
+                {
+                    collideMapStr += Convert.ToInt32(collideMap[i, j]);
+                }
+            }
+            for (int i = 0; i < objects.Count; i++)
+            {
+                objectsStr += "{" + objects[i].ToString() + "},";
+            }
+            objectsStr = objectsStr.Substring(0, objectsStr.Length - 1);
+            String mapStr = "{" + string.Format("\"background\": \"{0}\",\"collide_map\": \"{1}\",\"object\": [{2}]", background,
+                collideMapStr, objectsStr) + "}";
+
+            return mapStr;
         }
     }
 }
