@@ -37,8 +37,17 @@ namespace Demo
 
         public void ProvideData(Transform transform, int idx)
         {
-            Image img = transform.GetComponent<Image>();
-            img.sprite = resList[idx];
+            if (this.gameObject.name.Contains("Map"))
+            {
+                Image img = transform.GetComponent<Image>();
+                img.sprite = resList[idx];
+            }
+            else if (this.gameObject.name.Contains("Object"))
+            {
+                Image img = transform.GetChild(0).GetComponent<Image>();
+                img.sprite = resList[idx];
+                img.rectTransform.sizeDelta = new Vector2(Mathf.Min(resList[idx].texture.width, 100), Mathf.Min(resList[idx].texture.height, 100));
+            }
         }
 
         void Awake()

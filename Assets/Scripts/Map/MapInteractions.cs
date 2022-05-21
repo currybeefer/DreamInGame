@@ -112,7 +112,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             AddObject();
         } else if (ObjectType == 1 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
-             AddCollider();
+            AddCollider();
         }
     }
 
@@ -179,7 +179,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
         AddedObject.transform.position = Input.mousePosition;
         AddedObject.GetComponent<Image>().sprite = curImage.sprite;
-        AddedObject.GetComponent<Image>().rectTransform.sizeDelta = curImage.sprite.textureRect.size;
+        AddedObject.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(curImage.sprite.texture.width, curImage.sprite.texture.height);
         TMP_InputField messageInput = Message.GetComponent<TMP_InputField>();
         AddedObject.GetComponent<ObjectScript>().message = messageInput.text;
         objects.Add(AddedObject);

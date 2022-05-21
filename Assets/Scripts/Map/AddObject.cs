@@ -14,9 +14,10 @@ public class AddObject : MonoBehaviour
 
         GameObject Temp = MapInteractions.Instance.TempImage;
         Image TempImage = Temp.GetComponent<Image>();
-        TempImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
+        TempImage.sprite = currentScrollCell.transform.GetChild(0).GetComponent<Image>().sprite;
         TempImage.color = Color.white;
-        TempImage.rectTransform.sizeDelta = currentScrollCell.GetComponent<Image>().sprite.textureRect.size;
+        Texture tex = currentScrollCell.transform.GetChild(0).GetComponent<Image>().sprite.texture;
+        TempImage.rectTransform.sizeDelta = new Vector2(tex.width, tex.height);
         MapInteractions.Instance.ObjectType = 0;
         MapInteractions.Instance.Tools.SelectNone();
     }
