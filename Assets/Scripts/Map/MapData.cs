@@ -63,7 +63,10 @@ namespace EditorLogics
             {
                 for (int j = 0; j < collideMap.GetLength(1); j++)
                 {
-                    collideMapStr += Convert.ToInt32(collideMap[i, j]);
+                    if (collideMap[i, j])
+                    {
+                        collideMapStr += i + j;
+                    }
                 }
             }
             for (int i = 0; i < objects.Count; i++)
