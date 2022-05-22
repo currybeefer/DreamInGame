@@ -27,7 +27,7 @@ public class ObjectScript : MonoBehaviour, IPointerClickHandler
     }
 
     private void Remove(){
-        MapInteractions.Instance.objects.Remove(gameObject);
+        MapInteractions.Instance.RemoveObject(gameObject);
         Destroy(gameObject, 0);
     }
 

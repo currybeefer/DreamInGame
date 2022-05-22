@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using TMPro;
+using UnityEditor;
 
 /**
  * ��ͼ������
@@ -53,7 +54,6 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     //��Ʒ
     [HideInInspector]
     public List<GameObject> objects = new List<GameObject>();
-    
     public List<ObjectInfo> objectInfoList;
 
     private void Start()
@@ -185,7 +185,10 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         objects.Add(AddedObject);
 
         ObjectInfo curObjectInfo = new ObjectInfo();
-        curObjectInfo.SetImage(curImage.sprite.name);
+        String path = AssetDatabase.GetAssetPath(curImage.sprite);
+        String[] seperator = {"Resources/"};
+        String[] strlist = path.Split(seperator, 2, StringSplitOptions.RemoveEmptyEntries);
+        curObjectInfo.SetImage(strlist[1]);
         curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
         curObjectInfo.SetPosition(Input.mousePosition);
         objectInfoList.Add(curObjectInfo);
@@ -193,7 +196,9 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void RemoveObject(GameObject obj)
     {
-        objects.Remove(obj);
+        int idx = objects.IndexOf(obj);
+        objects.RemoveAt(idx);
+        objectInfoList.RemoveAt(idx);
     }
 
     private Vector3 GetMapPosition()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Demo
 {
@@ -10,6 +11,8 @@ namespace Demo
     public class InitOnStart : MonoBehaviour, LoopScrollPrefabSource, LoopScrollDataSource
     {
         public GameObject item;
+        public GameObject mapFilter;
+        public GameObject objectFilter;
         public int totalCount = -1;
         private Sprite[] resList;
 
@@ -50,16 +53,16 @@ namespace Demo
             }
         }
 
-        void Awake()
+        public void Awake()
         {
             var ls = GetComponent<LoopScrollRect>();
             if (this.gameObject.name.Contains("Map"))
             {
-                resList = Resources.LoadAll<Sprite>("Maps");
+                resList = Resources.LoadAll<Sprite>("Maps/" + mapFilter.GetComponent<TMP_Text>().text);
             }
             else if (this.gameObject.name.Contains("Object"))
             {
-                resList = Resources.LoadAll<Sprite>("Objects");
+                resList = Resources.LoadAll<Sprite>("Objects/" + objectFilter.GetComponent<TMP_Text>().text);
             }
             
             int resCount = resList.Length;
