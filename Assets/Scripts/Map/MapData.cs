@@ -65,9 +65,11 @@ namespace EditorLogics
                 {
                     if (collideMap[i, j])
                     {
-                        collideMapStr += i + j;
+                        string pos = j + ",";
+                        collideMapStr += pos;
                     }
                 }
+                collideMapStr += ";";
             }
             for (int i = 0; i < objects.Count; i++)
             {
