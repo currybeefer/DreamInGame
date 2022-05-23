@@ -2537,7 +2537,7 @@ MonoBehaviour:
   RotationImage: {fileID: 21300000, guid: 8545c8e0e9acd436d99ac14055e433d1, type: 3}
   Tools: {fileID: 1497489452}
   ObjectType: -1
-  ColliderSize: 20
+  ColliderSize: 32
   objects: []
   objectInfoList: []
 --- !u!1 &276450036

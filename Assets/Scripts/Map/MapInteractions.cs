@@ -44,10 +44,10 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     
     private bool Dragging = false;
     private Vector3 MouseIniPos;
+    public int ColliderSize = 32;
 
     //��ײ��
     [HideInInspector]
-    public int ColliderSize = 20;
     public bool[,] collideMap;
     private List<GameObject> colliders = new List<GameObject>();
 
@@ -152,8 +152,10 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / ColliderSize);
         int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / ColliderSize);
 
-        float posOfWidth = -mapWidth / 2 + indexOfWidth * ColliderSize + 10;
-        float posOfHeight = mapHeight / 2 - indexOfHeight * ColliderSize - 10;
+        float posOfWidth = -mapWidth / 2 + indexOfWidth * ColliderSize + ColliderSize / 2;
+        float posOfHeight = mapHeight / 2 - indexOfHeight * ColliderSize - ColliderSize / 2;
+        Debug.Log(posOfWidth);
+        Debug.Log(posOfHeight);
 
         GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
         AddedObject.transform.localPosition = new Vector2(posOfWidth, posOfHeight);
