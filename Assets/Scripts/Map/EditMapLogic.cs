@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EditorLogics;
+using UnityEditor;
+using System;
 
 /**
  * Map Editor��UI
@@ -67,7 +69,11 @@ public class EditMapLogic : MonoBehaviour
         EditorData.Instance.map.SetCollideMap(mapInteractions.collideMap);
         EditorData.Instance.map.SetCollideMapSize(mapInteractions.ColliderSize);
         EditorData.Instance.map.SetObejcts(mapInteractions.objectInfoList);
-        EditorData.Instance.map.SetBackground(mapInteractions.GetComponent<Image>().sprite.name);
+
+        string path = AssetDatabase.GetAssetPath(mapInteractions.GetComponent<Image>().sprite);
+        string[] seperator = { "Resources/" };
+        string[] strlist = path.Split(seperator, 2, StringSplitOptions.RemoveEmptyEntries);
+        EditorData.Instance.map.SetBackground(strlist[1]);
     }
 
     
