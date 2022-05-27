@@ -194,6 +194,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
         curObjectInfo.SetPosition(Input.mousePosition);
         objectInfoList.Add(curObjectInfo);
+        messageInput.text = "";
     }
 
     public void RemoveObject(GameObject obj)

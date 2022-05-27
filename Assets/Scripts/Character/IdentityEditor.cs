@@ -70,6 +70,7 @@ public class IdentityEditor : MonoBehaviour
     }
 
     public void BackButton(){
+        EditCharacters.Instance.DeleteCurCharacter();
         EditCharacters.Instance.SwitchToCharacters();
     }
 }

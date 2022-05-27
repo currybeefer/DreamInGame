@@ -23,6 +23,21 @@ public class EditGameSettings : MonoBehaviour
 
     public void SaveButton()
     {
+        if(GameTitle.text==""){
+            Warning.Instance.SetEmptyMessage("GameTitle");
+            Warning.Instance.Show();
+            return;
+        }
+        if(GameTime.text==""){
+            Warning.Instance.SetEmptyMessage("GameTime");
+            Warning.Instance.Show();
+            return;
+        }
+        if(EndMessage.text==""){
+            Warning.Instance.SetEmptyMessage("Endmessage");
+            Warning.Instance.Show();
+            return;
+        }
         EditorData data = EditorData.Instance;
         data.SetName(GameTitle.text);
         data.SetEnd(EndMessage.text);

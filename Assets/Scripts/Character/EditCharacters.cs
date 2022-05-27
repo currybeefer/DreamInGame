@@ -85,6 +85,13 @@ public class EditCharacters : MonoBehaviour
         RePosition();
     }
 
+    public void DeleteCurCharacter(){
+        if(curPanel == null){
+            return;
+        }
+        DeleteButton(curPanel);
+    }
+
     public void RePosition()
     {
         for(int i =0; i < CharacterPanels.Count; i++)

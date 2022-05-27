@@ -30,6 +30,16 @@ public class StoryEditor : MonoBehaviour
     }
 
     public void SaveButton(){
+        if(name.text == ""){
+            Warning.Instance.SetEmptyMessage("Name");
+            Warning.Instance.Show();
+            return;
+        }
+        if(story.text == ""){
+            Warning.Instance.SetEmptyMessage("Story");
+            Warning.Instance.Show();
+            return;
+        }
         EditCharacters editor = EditCharacters.Instance;
         editor.curCharacter.SetIdentity(identityEditor.curIdentity);
         editor.curCharacter.SetName(name.text);
