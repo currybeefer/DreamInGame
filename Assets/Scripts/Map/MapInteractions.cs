@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using TMPro;
-using UnityEditor;
 
 /**
  * ��ͼ������
