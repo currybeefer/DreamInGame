@@ -49,6 +49,7 @@ public class StoryEditor : MonoBehaviour
         CharacterInfo curCharacterInfo = editor.curCharacter;
         //CharacterInfoList.Add(curCharacterInfo);
         editor.AddInfo();
+        editor.curPanel.isComplete = true;
         
         editor.curPanel.identityDisplay.sprite = identityDisplay.sprite;
         editor.curPanel.name.text = name.text;

@@ -11,6 +11,8 @@ public class CharacterPanel : MonoBehaviour
     public Button btn;
     public TMP_Text name;
     public Image identityDisplay;
+    [HideInInspector]
+    public bool isComplete;
     // Start is called before the first frame update
     // void Start()
     // {
