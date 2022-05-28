@@ -49,7 +49,7 @@ public class EditGameSettings : MonoBehaviour
         //String jsonFilePath = "D:/DreamInGame/test.json";
         //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
         
-        //EditorGameManager.SendJsonByHttpPost(dataJsonStr);
+        EditorGameManager.SendJsonByHttpPost(dataJsonStr);
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
     }
