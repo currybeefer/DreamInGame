@@ -81,7 +81,9 @@ public class EditCharacters : MonoBehaviour
 
     public void DeleteButton(CharacterPanel panel){
         int idx = CharacterPanels.IndexOf(panel);
-        CharacterInfoList.RemoveAt(idx);
+        if(idx < CharacterInfoList.Count){
+            CharacterInfoList.RemoveAt(idx);
+        }
         CharacterPanels.Remove(panel);
         Destroy(panel.gameObject);
         RePosition();
