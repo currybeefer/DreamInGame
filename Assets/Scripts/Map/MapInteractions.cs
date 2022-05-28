@@ -53,17 +53,19 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     //��ײ��
     [HideInInspector]
     public bool[,] collideMap;
-    private List<GameObject> colliders = new List<GameObject>();
+    public List<GameObject> colliders;
 
     //��Ʒ
     [HideInInspector]
-    public List<GameObject> objects = new List<GameObject>();
+    public List<GameObject> objects;
     public List<ObjectInfo> objectInfoList;
 
     private void Start()
     {
-        SetMap();
+        objects = new List<GameObject>();
+        colliders = new List<GameObject>();
         objectInfoList = new List<ObjectInfo>();
+        SetMap();
     }
 
     void Awake()
@@ -76,7 +78,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         Background = gameObject;
     }
 
-    void OnEnable(){
+    public void OnEnable(){
         Image BackgroundImage = Background.GetComponent<Image>();
         if(BackgroundImage.sprite == null){
             ChangeBackground selected = Maps.GetComponentInChildren<ChangeBackground>();
@@ -120,12 +122,14 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             AddCollider();
         } else if (ObjectType == 4&& Input.GetMouseButtonDown(0)){
+            MouseIniPos = Input.mousePosition;
             Dragging = true;
         }
     }
 
-    public void ColliderButton()
+    public void SetToCollider()
     {
+        ObjectType = 1;
         TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
         TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
         TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
@@ -136,6 +140,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TempImage.GetComponent<Image>().sprite = null;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
     }
+
 
     /**
      * Set MyMap after changing background
@@ -150,11 +155,26 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         //Set the Collide Map
         Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
         collideMap = new bool[Mathf.CeilToInt(map_size.y / ColliderSize), Mathf.CeilToInt(map_size.x / ColliderSize)];
-        for (int i = 0; i < colliders.Count; i++)
+        ClearMap();
+    }
+
+    public void ClearMap(){
+        foreach(GameObject col in colliders)
         {
-            Destroy(colliders[i]);
+            Destroy(col);
         }
         colliders.Clear();
+        foreach(GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+        objects.Clear();
+        objectInfoList.Clear();
+    }
+
+    public void Clear(){
+        ClearMap();
+
     }
 
     public void AddCollider()

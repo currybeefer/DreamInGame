@@ -14,12 +14,14 @@ public class EditGameSettings : MonoBehaviour
     public TMP_InputField GameTitle;
     public TMP_InputField GameTime;
     public TMP_InputField EndMessage;
+    public GameObject FinishPage;
 
     public void BackButton()
     {
         MapUI.SetActive(true);
         GameUI.SetActive(false);
     }
+
 
     public void SaveButton()
     {
@@ -47,6 +49,15 @@ public class EditGameSettings : MonoBehaviour
         //String jsonFilePath = "D:/DreamInGame/test.json";
         //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
         
-        EditorGameManager.SendJsonByHttpPost(dataJsonStr);
+        //EditorGameManager.SendJsonByHttpPost(dataJsonStr);
+        GameUI.SetActive(false);
+        FinishPage.SetActive(true);
+    }
+
+    public void ClearSettings(){
+        GameTitle.text = "";
+        EndMessage.text = "";
+        GameTime.text = "";
+
     }
 }

@@ -27,7 +27,7 @@ public class EditCharacters : MonoBehaviour
     public CharacterInfo curCharacter;
     [HideInInspector]
     public CharacterPanel curPanel;
-    [HideInInspector]
+
     public List<CharacterInfo> CharacterInfoList;
 
     
@@ -80,6 +80,8 @@ public class EditCharacters : MonoBehaviour
     }
 
     public void DeleteButton(CharacterPanel panel){
+        int idx = CharacterPanels.IndexOf(panel);
+        CharacterInfoList.RemoveAt(idx);
         CharacterPanels.Remove(panel);
         Destroy(panel.gameObject);
         RePosition();
@@ -121,5 +123,11 @@ public class EditCharacters : MonoBehaviour
 
     public void AddInfo(){
         CharacterInfoList.Add(curCharacter);
+    }
+
+    public void ClearCharacters(){
+        while(CharacterPanels.Count > 0 ){
+            DeleteButton(CharacterPanels[0]);
+        }
     }
 }

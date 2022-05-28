@@ -34,7 +34,9 @@ namespace EditorLogics
             {
                 characterInfoStr += "{" + CharacterInfoList[i].ToString() + "},";
             }
-            characterInfoStr = characterInfoStr.Substring(0, characterInfoStr.Length - 1);
+            if(characterInfoStr != ""){
+                characterInfoStr = characterInfoStr.Substring(0, characterInfoStr.Length - 1);
+            }
             string nameWithNumOfPlayer = name + "," + CharacterInfoList.Count.ToString();
             String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"end\": \"{1}\",\"length\": {2},\"map\": [{3}],\"character\": [{4}]", nameWithNumOfPlayer, end, length, map.ToString(),
                 characterInfoStr) + "}";

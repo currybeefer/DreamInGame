@@ -21,6 +21,20 @@ public class EditMapLogic : MonoBehaviour
     public GameObject Message;
     public GameObject MapSelectBg;
     public GameObject ObjectSelectBg;
+    public GameObject mapButton;
+
+
+    public void ClearMap(){
+        MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
+        Background.GetComponent<Image>().sprite = null;
+        mapInteractions.OnEnable();
+        mapInteractions.SetMap();
+        mapInteractions.SetToDrag();
+        ButtonGroup Options = mapButton.transform.parent.GetComponent<ButtonGroup>();
+        MapButton();
+        Options.Select(mapButton);
+
+    }
 
     public void MapButton()
     {
@@ -28,7 +42,6 @@ public class EditMapLogic : MonoBehaviour
         CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(false);
         Message.SetActive(false);
-        Background.GetComponent<MapInteractions>().ObjectType = -1;
         MapSelectBg.SetActive(true);
         ObjectSelectBg.SetActive(false);
     }
@@ -39,7 +52,6 @@ public class EditMapLogic : MonoBehaviour
         CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(true);
         Message.SetActive(true);
-        Background.GetComponent<MapInteractions>().ObjectType = -1;
         MapSelectBg.SetActive(false);
         ObjectSelectBg.SetActive(true);
     }
@@ -47,7 +59,6 @@ public class EditMapLogic : MonoBehaviour
     public void CollideButton()
     {
         CollideMap.SetActive(true);
-        Background.GetComponent<MapInteractions>().ObjectType = 1;
     }
 
     public void BackButton()
