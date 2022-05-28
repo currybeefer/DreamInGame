@@ -4,18 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /**
- * »¬¶¯ÁÐ±íÖÐµÄ±³¾°°´Å¥
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ÐµÄ±ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
  */
 
 public class ChangeBackground : MonoBehaviour
 {
     public void BackgroundButton(GameObject currentScrollCell)
     {
-        GameObject Background = currentScrollCell.transform.parent.parent.parent.GetChild(0).GetChild(0).gameObject;
+        GameObject Background = MapInteractions.Instance.gameObject;
         Image BackgroundImage = Background.GetComponent<Image>();
         BackgroundImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
         BackgroundImage.color = Color.white;
         BackgroundImage.rectTransform.sizeDelta = currentScrollCell.GetComponent<Image>().sprite.textureRect.size;
         Background.GetComponent<MapInteractions>().SetMap();
+        MapInteractions.Instance.SaveMapPath(BackgroundImage.sprite.name);
     }
 }

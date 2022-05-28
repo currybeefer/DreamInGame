@@ -69,11 +69,7 @@ public class EditMapLogic : MonoBehaviour
         EditorData.Instance.map.SetCollideMap(mapInteractions.collideMap);
         EditorData.Instance.map.SetCollideMapSize(mapInteractions.ColliderSize);
         EditorData.Instance.map.SetObejcts(mapInteractions.objectInfoList);
-
-        string path = AssetDatabase.GetAssetPath(mapInteractions.GetComponent<Image>().sprite);
-        string[] seperator = { "Resources/" };
-        string[] strlist = path.Split(seperator, 2, StringSplitOptions.RemoveEmptyEntries);
-        EditorData.Instance.map.SetBackground(strlist[1]);
+        EditorData.Instance.map.SetBackground(mapInteractions.curMapPath);
     }
 
     

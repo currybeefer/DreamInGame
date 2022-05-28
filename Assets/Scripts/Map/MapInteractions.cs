@@ -26,6 +26,11 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public GameObject Maps;
     public Sprite EraserImage;
     public Sprite RotationImage;
+    public Sprite DraggingImage;
+    public TMP_Text mapFilter;
+    public TMP_Text objectFilter;
+    public string curMapPath;
+
 
     public ButtonGroup Tools;
     /**
@@ -95,7 +100,9 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonUp(1))
+        if (ObjectType == 4 && !Input.GetMouseButton(0) && !Input.GetMouseButton(1)){
+            Dragging = false;
+        } else if (ObjectType != 4 && Input.GetMouseButtonUp(1))
         {
             Dragging = false;
         }
@@ -112,6 +119,8 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         } else if (ObjectType == 1 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
             AddCollider();
+        } else if (ObjectType == 4&& Input.GetMouseButtonDown(0)){
+            Dragging = true;
         }
     }
 
@@ -131,6 +140,11 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     /**
      * Set MyMap after changing background
      */
+
+    public void SaveMapPath(string name){
+        curMapPath = "Maps/" + mapFilter.text + "/" + name; 
+    }
+
     public void SetMap()
     {
         //Set the Collide Map
@@ -186,10 +200,8 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         objects.Add(AddedObject);
 
         ObjectInfo curObjectInfo = new ObjectInfo();
-        String path = AssetDatabase.GetAssetPath(curImage.sprite);
-        String[] seperator = {"Resources/"};
-        String[] strlist = path.Split(seperator, 2, StringSplitOptions.RemoveEmptyEntries);
-        curObjectInfo.SetImage(strlist[1]);
+        string path = "Objects/" + objectFilter.text +"/" +  curImage.sprite.name;
+        curObjectInfo.SetImage(path);
         curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
         curObjectInfo.SetPosition(Input.mousePosition);
         objectInfoList.Add(curObjectInfo);
@@ -235,6 +247,13 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public void SetToRotate(){
         ObjectType = 3;
         TempImage.GetComponent<Image>().sprite = RotationImage;
+        TempImage.GetComponent<Image>().color = Color.white;
+        TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+    }
+
+    public void SetToDrag(){
+        ObjectType = 4;
+        TempImage.GetComponent<Image>().sprite = DraggingImage;
         TempImage.GetComponent<Image>().color = Color.white;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
     }
