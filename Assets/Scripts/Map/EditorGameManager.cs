@@ -63,7 +63,7 @@ namespace EditorLogics
             request.downloadHandler = new DownloadHandlerBuffer();//实例化下载存贮器
             request.SetRequestHeader("Content-Type", "application/json");//更改内容类型，
             request.SendWebRequest();//发送请求
-            
+#if UNITY_EDITOR
             while (!request.isDone)
             {
                 Debug.Log("wait");
@@ -81,6 +81,8 @@ namespace EditorLogics
                 Debug.Log(request.error);
                 Debug.Log(request.responseCode);
             }
+#endif
+            
         }
         
         public bool IsBusy=false;//用于检测是否重复发送
