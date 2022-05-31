@@ -4032,18 +4032,18 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Indoor
+    - m_Text: InDoor
       m_Image: {fileID: 0}
-    - m_Text: Outdoor
+    - m_Text: OutDoor
       m_Image: {fileID: 0}
     - m_Text: Mixed
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020313404}
-        m_TargetAssemblyTypeName: Demo.InitOnStart, Assembly-CSharp
-        m_MethodName: Awake
+      - m_Target: {fileID: 274828765}
+        m_TargetAssemblyTypeName: MapInteractions, Assembly-CSharp
+        m_MethodName: SetToNormal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15746,6 +15746,30 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 274828765}
+        m_TargetAssemblyTypeName: MapInteractions, Assembly-CSharp
+        m_MethodName: SetToNormal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1497489452}
+        m_TargetAssemblyTypeName: ButtonGroup, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 247014551}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
