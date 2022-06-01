@@ -212,7 +212,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         Image curImage = TempImage.GetComponent<Image>();
         GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
-        AddedObject.transform.position = Input.mousePosition;
+        AddedObject.transform.localPosition = TempImage.transform.localPosition;
         AddedObject.GetComponent<Image>().sprite = curImage.sprite;
         AddedObject.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(curImage.sprite.texture.width, curImage.sprite.texture.height);
         TMP_InputField messageInput = Message.GetComponent<TMP_InputField>();
@@ -223,7 +223,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         string path = "Objects/" + objectFilter.text +"/" +  curImage.sprite.name;
         curObjectInfo.SetImage(path);
         curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
-        curObjectInfo.SetPosition(Input.mousePosition - transform.position);
+        curObjectInfo.SetPosition(AddedObject.transform.localPosition);
         objectInfoList.Add(curObjectInfo);
         messageInput.text = "";
     }
