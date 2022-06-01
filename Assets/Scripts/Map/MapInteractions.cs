@@ -223,7 +223,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         string path = "Objects/" + objectFilter.text +"/" +  curImage.sprite.name;
         curObjectInfo.SetImage(path);
         curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
-        curObjectInfo.SetPosition(Input.mousePosition);
+        curObjectInfo.SetPosition(Input.mousePosition - transform.position);
         objectInfoList.Add(curObjectInfo);
         messageInput.text = "";
     }
