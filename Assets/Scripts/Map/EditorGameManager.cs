@@ -45,8 +45,10 @@ namespace EditorLogics
             //String jsonDataPost = ReadJsonFile(jsonFilePath);
             String url = "https://api.dreamin.land/game_info_post/";
             Encoding encoding = Encoding.UTF8;
+
             byte[] buffer = encoding.GetBytes(jsonDataPost);
             HttpsPost(url, buffer);
+            //StartCoroutine(Upload(url, jsonDataPost));
         }
         
         /// <summary>
@@ -61,7 +63,7 @@ namespace EditorLogics
 
             request.uploadHandler = new UploadHandlerRaw(postBytes);//实例化上传缓存器
             request.downloadHandler = new DownloadHandlerBuffer();//实例化下载存贮器
-            request.SetRequestHeader("Content-Type", "application/json");//更改内容类型，
+
             request.SendWebRequest();//发送请求
 #if UNITY_EDITOR
             while (!request.isDone)

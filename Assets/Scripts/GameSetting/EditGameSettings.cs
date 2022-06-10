@@ -6,6 +6,9 @@ using EditorLogics;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Networking;
+using System.Net;
+using System.Text;
 
 public class EditGameSettings : MonoBehaviour
 {
@@ -44,12 +47,14 @@ public class EditGameSettings : MonoBehaviour
         data.SetName(GameTitle.text);
         data.SetEnd(EndMessage.text);
         data.SetLength(int.Parse(GameTime.text));
-        String dataJsonStr = data.ToString();
+        string dataJsonStr = data.ToString();
         print(dataJsonStr);
         //String jsonFilePath = "D:/DreamInGame/test.json";
         //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
         
         EditorGameManager.SendJsonByHttpPost(dataJsonStr);
+        //string url = "https://api.dreamin.land/game_info_post/";
+        //StartCoroutine(Upload(url, dataJsonStr));
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
     }
@@ -59,5 +64,28 @@ public class EditGameSettings : MonoBehaviour
         EndMessage.text = "";
         GameTime.text = "";
 
+    }
+
+    IEnumerator Upload(string url, string jsonData)
+    {
+        WWWForm form = new WWWForm();
+        Encoding encoding = Encoding.UTF8;
+        byte[] buffer = encoding.GetBytes(jsonData);
+        form.AddBinaryData("game", buffer);
+
+        using (UnityWebRequest www = UnityWebRequest.Post(url,jsonData))
+        {
+            
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
+        }
     }
 }

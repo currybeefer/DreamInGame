@@ -31,7 +31,7 @@ public class EditCharacters : MonoBehaviour
     public List<CharacterInfo> CharacterInfoList;
 
     
-    private int maxCharacters = 8;
+    private int maxCharacters = 6;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class EditCharacters : MonoBehaviour
         mapData = new MapData();
         CharacterPanels = new List<CharacterPanel>();
         CharacterInfoList = new List<CharacterInfo>();
-        Vector3 pos = new Vector3(-400, 0, 0);
+        Vector3 pos = new Vector3(-300, 0, 0);
         Add.transform.localPosition = pos;
     }
 
@@ -62,20 +62,20 @@ public class EditCharacters : MonoBehaviour
 
     public void AddButton()
     {
-        if(CharacterPanels.Count >= maxCharacters)
-        {
-            return;
-        }
 
         int idx = CharacterPanels.Count;
-        Vector3 pos = new Vector3(-400, 0, 0);
-        pos.x += 80 * idx;
+        Vector3 pos = new Vector3(-300, 0, 0);
+        pos.x += 120 * idx;
         GameObject cur = Instantiate(CharacterTag, CharactersUI.transform);
         cur.transform.localPosition = pos;
-        Vector3 addPos = new Vector3(-400 + 80 * (idx + 1), 0, 0);
+        Vector3 addPos = new Vector3(-300 + 120 * (idx + 1), 0, 0);
         Add.transform.localPosition = addPos;
         curPanel = cur.GetComponent(typeof(CharacterPanel)) as CharacterPanel;
         CharacterPanels.Add(curPanel);
+        if(CharacterPanels.Count >= maxCharacters)
+        {
+            Add.SetActive(false);
+        }
         SwitchToCharacter();
     }
 
@@ -100,11 +100,15 @@ public class EditCharacters : MonoBehaviour
     {
         for(int i =0; i < CharacterPanels.Count; i++)
         {
-            Vector3 pos = new Vector3(-400 + 80 * i, 0, 0);
+            Vector3 pos = new Vector3(-300 + 120 * i, 0, 0);
             CharacterPanels[i].transform.localPosition = pos;
         }
-        Vector3 addPos = new Vector3(-400 + 80 * CharacterPanels.Count, 0, 0);
+        Vector3 addPos = new Vector3(-300 + 120 * CharacterPanels.Count, 0, 0);
         Add.transform.localPosition = addPos;
+        if(CharacterPanels.Count < maxCharacters)
+        {
+            Add.SetActive(true);
+        }
         
     }
 
