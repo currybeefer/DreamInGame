@@ -30,7 +30,7 @@ namespace EditorLogics
         public override string ToString()
         {
             String characterInfoStr = "";
-            for (int i = 0; i < CharacterInfoList.Count; i++)
+             for (int i = 0; i < CharacterInfoList.Count; i++)
             {
                 characterInfoStr += "{" + CharacterInfoList[i].ToString() + "},";
             }

@@ -121,7 +121,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         } else if (ObjectType == 1 && Input.GetMouseButtonDown(0) && TempImage.GetComponent<Image>().sprite != null)
         {
             AddCollider();
-        } else if (ObjectType == 4&& Input.GetMouseButtonDown(0)){
+        } else if (ObjectType == 4 && Input.GetMouseButtonDown(0)){
             MouseIniPos = Input.mousePosition;
             Dragging = true;
         }
@@ -212,7 +212,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         Image curImage = TempImage.GetComponent<Image>();
         GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
-        AddedObject.transform.localPosition = TempImage.transform.localPosition;
+        AddedObject.transform.position = TempImage.transform.position;
         AddedObject.GetComponent<Image>().sprite = curImage.sprite;
         AddedObject.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(curImage.sprite.texture.width, curImage.sprite.texture.height);
         TMP_InputField messageInput = Message.GetComponent<TMP_InputField>();

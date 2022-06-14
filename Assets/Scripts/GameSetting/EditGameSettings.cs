@@ -48,6 +48,7 @@ public class EditGameSettings : MonoBehaviour
         data.SetEnd(EndMessage.text);
         data.SetLength(int.Parse(GameTime.text));
         string dataJsonStr = data.ToString();
+        dataJsonStr = dataJsonStr.Replace("\n", "\\n");
         print(dataJsonStr);
         //String jsonFilePath = "D:/DreamInGame/test.json";
         //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
