@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using System;
 using EditorLogics;
 using TMPro;
-
+/// <summary>
+/// Character(s) Editor
+/// </summary>
 public class EditCharacters : MonoBehaviour
 {
     public static EditorData editorData;
@@ -52,6 +54,9 @@ public class EditCharacters : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Move to Map Editor
+    /// </summary>
     public void NextButton()
     {
         CharactersUI.SetActive(false);
@@ -60,6 +65,9 @@ public class EditCharacters : MonoBehaviour
         EditorData.Instance.SetCharacterInfoList(CharacterInfoList);
     }
 
+    /// <summary>
+    /// Create a new character
+    /// </summary>
     public void AddButton()
     {
 
@@ -79,6 +87,10 @@ public class EditCharacters : MonoBehaviour
         SwitchToCharacter();
     }
 
+    /// <summary>
+    /// Delete a Character
+    /// </summary>
+    /// <param name="panel"></param>
     public void DeleteButton(CharacterPanel panel){
         int idx = CharacterPanels.IndexOf(panel);
         if(idx < CharacterInfoList.Count){
@@ -89,6 +101,9 @@ public class EditCharacters : MonoBehaviour
         RePosition();
     }
 
+    /// <summary>
+    /// Delete a Character
+    /// </summary>
     public void DeleteCurCharacter(){
         if(curPanel == null){
             return;
@@ -96,6 +111,9 @@ public class EditCharacters : MonoBehaviour
         DeleteButton(curPanel);
     }
 
+    /// <summary>
+    /// Reposition Character Panels
+    /// </summary>
     public void RePosition()
     {
         for(int i =0; i < CharacterPanels.Count; i++)
@@ -112,6 +130,9 @@ public class EditCharacters : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Move to Character Editor
+    /// </summary>
     public void SwitchToCharacter()
     {
         curCharacter = curPanel.info;
@@ -121,16 +142,25 @@ public class EditCharacters : MonoBehaviour
         characterEditor.onActive(curCharacter);
     }
 
+    /// <summary>
+    /// Move to Character(s) Editor
+    /// </summary>
     public void SwitchToCharacters()
     {
         CharactersUI.SetActive(true);
         CharacterUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Add a Character
+    /// </summary>
     public void AddInfo(){
         CharacterInfoList.Add(curCharacter);
     }
 
+    /// <summary>
+    /// Delete all Characters
+    /// </summary>
     public void ClearCharacters(){
         while(CharacterPanels.Count > 0 ){
             DeleteButton(CharacterPanels[0]);

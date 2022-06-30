@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
-
+/// <summary>
+/// Storing info of characters
+/// </summary>
 [Serializable]
 public class CharacterInfo
 {
@@ -10,6 +12,7 @@ public class CharacterInfo
         Murderer,
         Suspect
     }
+
     private string name_;
     private IdentityType identity_;
     private string story_;
@@ -62,6 +65,10 @@ public class CharacterInfo
         identity_ = identity;
     }
     
+    /// <summary>
+    /// Create Json data
+    /// </summary>
+    /// <returns>Json Data</returns>
     public override string ToString()
     {
         return string.Format("\"name\": \"{0}\",\"identity\": {1},\"background\": \"{2}\"", name_, (int)identity_, story_);
