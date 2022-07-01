@@ -13,6 +13,9 @@ using UnityEngine.Networking;
 
 namespace EditorLogics
 {
+    /// <summary>
+    /// Sending data to backend
+    /// </summary>
     public class EditorGameManager
     {
         public static void SaveDataJsonFile(MapData mapData,String jsonFilePath)
@@ -37,7 +40,6 @@ namespace EditorLogics
                 }
             }
         }
-
 
         public static void SendJsonByHttpPost(String jsonDataPost)
         {

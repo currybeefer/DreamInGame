@@ -10,6 +10,9 @@ using UnityEngine.Networking;
 using System.Net;
 using System.Text;
 
+/// <summary>
+/// UI logics of game settings editor
+/// </summary>
 public class EditGameSettings : MonoBehaviour
 {
     public GameObject MapUI;
@@ -19,13 +22,18 @@ public class EditGameSettings : MonoBehaviour
     public TMP_InputField EndMessage;
     public GameObject FinishPage;
 
+    /// <summary>
+    /// Move back to map editor
+    /// </summary>
     public void BackButton()
     {
         MapUI.SetActive(true);
         GameUI.SetActive(false);
     }
 
-
+    /// <summary>
+    /// Create Json data and send to backend
+    /// </summary>
     public void SaveButton()
     {
         if(GameTitle.text==""){
@@ -60,6 +68,9 @@ public class EditGameSettings : MonoBehaviour
         FinishPage.SetActive(true);
     }
 
+    /// <summary>
+    /// Clear everything
+    /// </summary>
     public void ClearSettings(){
         GameTitle.text = "";
         EndMessage.text = "";
@@ -67,6 +78,12 @@ public class EditGameSettings : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Upload data to backend
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="jsonData"></param>
+    /// <returns></returns>
     IEnumerator Upload(string url, string jsonData)
     {
         WWWForm form = new WWWForm();
