@@ -16,7 +16,7 @@ namespace EditorLogics
     /// <summary>
     /// Sending data to backend
     /// </summary>
-    public class EditorGameManager
+    public class Network
     {
         public static void SaveDataJsonFile(MapData mapData,String jsonFilePath)
         {

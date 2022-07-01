@@ -60,8 +60,8 @@ public class EditGameSettings : MonoBehaviour
         print(dataJsonStr);
         //String jsonFilePath = "D:/DreamInGame/test.json";
         //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
-        
-        EditorGameManager.SendJsonByHttpPost(dataJsonStr);
+
+        EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
         //string url = "https://api.dreamin.land/game_info_post/";
         //StartCoroutine(Upload(url, dataJsonStr));
         GameUI.SetActive(false);
