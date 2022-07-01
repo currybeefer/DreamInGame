@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EditorLogics;
-//using UnityEditor;
 using System;
 
-/**
- * Map Editor��UI
- */
+/// <summary>
+/// UI logics of map editor
+/// </summary>
 public class EditMapLogic : MonoBehaviour
 {
     public GameObject MapLoopScroll;
@@ -23,7 +22,9 @@ public class EditMapLogic : MonoBehaviour
     public GameObject ObjectSelectBg;
     public GameObject mapButton;
 
-
+    /// <summary>
+    /// Clear everything in map
+    /// </summary>
     public void ClearMap(){
         MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
         Background.GetComponent<Image>().sprite = null;
@@ -36,6 +37,9 @@ public class EditMapLogic : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Switch to map scroll view
+    /// </summary>
     public void MapButton()
     {
         MapLoopScroll.SetActive(true);
@@ -46,6 +50,9 @@ public class EditMapLogic : MonoBehaviour
         ObjectSelectBg.SetActive(false);
     }
 
+    /// <summary>
+    /// Switch to object scroll view
+    /// </summary>
     public void ObjectButton()
     {
         MapLoopScroll.SetActive(false);
@@ -56,17 +63,26 @@ public class EditMapLogic : MonoBehaviour
         ObjectSelectBg.SetActive(true);
     }
 
+    /// <summary>
+    /// Switch to collider view
+    /// </summary>
     public void CollideButton()
     {
         CollideMap.SetActive(true);
     }
 
+    /// <summary>
+    /// Move to Characters editor
+    /// </summary>
     public void BackButton()
     {
         MapUI.SetActive(false);
         CharacterUI.SetActive(true);
     }
 
+    /// <summary>
+    /// Move to game settings editor
+    /// </summary>
     public void NextButton()
     {
         MapUI.SetActive(false);
@@ -74,6 +90,9 @@ public class EditMapLogic : MonoBehaviour
         SaveMapData();
     }
 
+    /// <summary>
+    /// Save all map data
+    /// </summary>
     private void SaveMapData()
     {
         MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
@@ -82,6 +101,4 @@ public class EditMapLogic : MonoBehaviour
         EditorData.Instance.map.SetObejcts(mapInteractions.objectInfoList);
         EditorData.Instance.map.SetBackground(mapInteractions.curMapPath);
     }
-
-    
 }

@@ -54,6 +54,10 @@ public class ObjectInfo
         message_ = message;
     }
     
+    /// <summary>
+    /// Convert to json data
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return string.Format("\"image_link\": \"{0}\",\"position\": \"{1}\",\"message\": \"{2}\"", image_, position_, message_);

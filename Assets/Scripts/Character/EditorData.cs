@@ -12,19 +12,19 @@ namespace EditorLogics
     public class EditorData : MonoBehaviour
     {
         public static EditorData Instance;
-        //剧本名称
+        //Name of this game
         public string name;
 
-        //剧本情节介绍
+        //Ending of this game
         public string end;
 
-        //
+        //Duration of this game
         public int length = 120;
 
-        //角色列表
+        //Characters of this game
         public List<CharacterInfo> CharacterInfoList;
 
-        //地图
+        //Map of this game
         public MapData map;
 
         public override string ToString()
@@ -90,7 +90,5 @@ namespace EditorLogics
         public void SetCharacterInfoList(List<CharacterInfo> infos){
             CharacterInfoList = new List<CharacterInfo>(infos);
         }
-        
-
     }
 }

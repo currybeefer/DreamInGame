@@ -3,18 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using EditorLogics;
 using Unity.Mathematics;
-//using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 using TMPro;
 
-/**
- * ��ͼ������
- * ������Ʒ���϶���
- */
-
+/// <summary>
+/// Map interactions
+/// </summary>
 public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public GameObject Background;
@@ -29,33 +26,38 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public Sprite DraggingImage;
     public TMP_Text mapFilter;
     public TMP_Text objectFilter;
-    public string curMapPath;
 
-
+    // Editing tools
     public ButtonGroup Tools;
     /**
      * -1 represent normal 
      * 0 represent object
      * 1 represent collider
      * 2 represent eraser
-     * 3 represents rotation
+     * 3 represent rotation
+     * 4 represent drag
      */
     public int ObjectType = -1;
 
     //Singleton
     public static MapInteractions Instance;
 
-    
+    //Map dragging
     private bool Dragging = false;
     private Vector3 MouseIniPos;
+
+    //Size of colliders
     public int ColliderSize = 32;
 
-    //��ײ��
-    [HideInInspector]
-    public bool[,] collideMap;
-    public List<GameObject> colliders;
+    //Path of background image
+    public string curMapPath;
 
-    //��Ʒ
+    //Colliders
+    [HideInInspector]
+    public List<GameObject> colliders;
+    public bool[,] collideMap;
+
+    //Objects
     [HideInInspector]
     public List<GameObject> objects;
     public List<ObjectInfo> objectInfoList;
@@ -66,6 +68,16 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         colliders = new List<GameObject>();
         objectInfoList = new List<ObjectInfo>();
         SetMap();
+    }
+
+    /// <summary>
+    /// Set the Collide Map
+    /// </summary>
+    public void SetMap()
+    {
+        Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
+        collideMap = new bool[Mathf.CeilToInt(map_size.y / ColliderSize), Mathf.CeilToInt(map_size.x / ColliderSize)];
+        ClearMap();
     }
 
     void Awake()
@@ -86,6 +98,9 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
     }
 
+    /// <summary>
+    /// Handle dragging and temp image following
+    /// </summary>
     void Update()
     {
         if (TempImage.GetComponent<Image>().sprite != null)
@@ -100,6 +115,11 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             MouseIniPos = Input.mousePosition;
         }
     }
+
+    /// <summary>
+    /// Stop dragging on pointer up
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
         if (ObjectType == 4 && !Input.GetMouseButton(0) && !Input.GetMouseButton(1)){
@@ -109,6 +129,11 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             Dragging = false;
         }
     }
+
+    /// <summary>
+    /// Start dragging on pointer down & Add collider and object on pointer down
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
         if (Input.GetMouseButtonDown(1))
@@ -127,14 +152,9 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
     }
 
-    public void SetToCollider()
-    {
-        ObjectType = 1;
-        TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
-        TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
-        TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
-    }
-
+    /// <summary>
+    /// Clear temp image(exit object or collider adding)
+    /// </summary>
     public void ClearTempImage()
     {
         TempImage.GetComponent<Image>().sprite = null;
@@ -142,22 +162,17 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     }
 
 
-    /**
-     * Set MyMap after changing background
-     */
-
+    /// <summary>
+    /// Change the path of background image
+    /// </summary>
+    /// <param name="name"></param>
     public void SaveMapPath(string name){
         curMapPath = "Maps/" + mapFilter.text + "/" + name; 
     }
 
-    public void SetMap()
-    {
-        //Set the Collide Map
-        Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
-        collideMap = new bool[Mathf.CeilToInt(map_size.y / ColliderSize), Mathf.CeilToInt(map_size.x / ColliderSize)];
-        ClearMap();
-    }
-
+    /// <summary>
+    /// Clear map
+    /// </summary>
     public void ClearMap(){
         foreach(GameObject col in colliders)
         {
@@ -170,13 +185,19 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
         objects.Clear();
         objectInfoList.Clear();
+        SetMap();
     }
 
+    /// <summary>
+    /// Clear Map
+    /// </summary>
     public void Clear(){
         ClearMap();
-
     }
 
+    /// <summary>
+    /// Add a collider
+    /// </summary>
     public void AddCollider()
     {
         Vector3 mousePos = TempImage.transform.localPosition;
@@ -196,6 +217,10 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         collideMap[indexOfHeight, indexOfWidth] = true;
     }
 
+    /// <summary>
+    /// Remove a collider
+    /// </summary>
+    /// <param name="collider"></param>
     public void RemoveCollider(GameObject collider)
     {
         Vector3 mousePos = TempImage.transform.localPosition;
@@ -208,6 +233,9 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         collideMap[indexOfHeight, indexOfWidth] = false;
     }
 
+    /// <summary>
+    /// Add an object
+    /// </summary>
     public void AddObject()
     {
         Image curImage = TempImage.GetComponent<Image>();
@@ -228,6 +256,10 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         messageInput.text = "";
     }
 
+    /// <summary>
+    /// Remove an object
+    /// </summary>
+    /// <param name="obj"></param>
     public void RemoveObject(GameObject obj)
     {
         int idx = objects.IndexOf(obj);
@@ -250,11 +282,30 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         return Background.GetComponent<RectTransform>().rect.height;
     }
 
+
+
+    /// <summary>
+    /// Switch to nothing
+    /// </summary>
     public void SetToNormal(){
         ObjectType = -1;
         ClearTempImage();
     }
 
+    /// <summary>
+    /// Switch to collider adding tool
+    /// </summary>
+    public void SetToCollider()
+    {
+        ObjectType = 1;
+        TempImage.GetComponent<Image>().sprite = ColliderImage.GetComponent<Image>().sprite;
+        TempImage.GetComponent<Image>().color = ColliderImage.GetComponent<Image>().color;
+        TempImage.GetComponent<Image>().rectTransform.sizeDelta = ColliderImage.GetComponent<Image>().rectTransform.sizeDelta;
+    }
+
+    /// <summary>
+    /// Switch to eraser tools
+    /// </summary>
     public void SetToEraser(){
         ObjectType = 2;
         ClearTempImage();

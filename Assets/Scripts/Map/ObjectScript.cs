@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/**
- * ��ײ��prefab
- */
+/// <summary>
+/// Object Script
+/// </summary>
 public class ObjectScript : MonoBehaviour, IPointerClickHandler
 {
     public string message = null;
-    // Start is called before the first frame update
+    /// <summary>
+    /// Handle events onclick
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
             switch(MapInteractions.Instance.ObjectType){
@@ -22,10 +25,12 @@ public class ObjectScript : MonoBehaviour, IPointerClickHandler
                 case 3:
                     Rotate();
                     break;
-
             }
     }
 
+    /// <summary>
+    /// Destroy this object
+    /// </summary>
     private void Remove(){
         MapInteractions.Instance.RemoveObject(gameObject);
         Destroy(gameObject, 0);

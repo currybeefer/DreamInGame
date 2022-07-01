@@ -8,13 +8,13 @@ namespace EditorLogics
 {
     public class MapData
     {
-        //map的图片名称，是否考虑添加一个唯一id用于标识
+        //Path of backgournd image
         string background = "";
-        //编辑器使用者在map上放置的物体
-        List<ObjectInfo> objects; //平均在150个，但大部分object的message为空字符串
-        //碰撞矩阵的大小，目前常量
-        int collideMapSize = 20;//这个变量的定义和下面这行数组初始化应该放到map的初始化函数里，目前临时放在这
-        //碰撞矩阵
+        //Objects
+        List<ObjectInfo> objects;
+        //Size of collider
+        int COLLIDE_MAP_SIZE = 32;
+        //Colliders
         bool[,] collideMap;
 
         public String GetBackground()
@@ -33,12 +33,12 @@ namespace EditorLogics
 
         public int GetCollideMapSize()
         {
-            return collideMapSize;
+            return COLLIDE_MAP_SIZE;
         }
 
         public void SetCollideMapSize(int size)
         {
-            collideMapSize = size;
+            COLLIDE_MAP_SIZE = size;
         }
 
         public void SetCollideMap(bool[,] newCollideMap){
@@ -55,7 +55,10 @@ namespace EditorLogics
             objects = new List<ObjectInfo>(objectInfos);
         }
 
-        
+        /// <summary>
+        /// Convert to json data
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             String collideMapStr = "",objectsStr = "";

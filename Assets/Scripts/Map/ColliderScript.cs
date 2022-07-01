@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/**
- * ŒÔ∆∑prefab
- */
+/// <summary>
+/// Collider script
+/// </summary>
 public class ColliderScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject CurrentObject;
+    /// <summary>
+    /// Destroy this collider onclick
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Input.GetMouseButtonUp(0))

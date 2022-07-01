@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/**
- * �����б��еı�����ť
- */
-
+/// <summary>
+/// Onlick event of background scroll cells
+/// </summary>
 public class ChangeBackground : MonoBehaviour
 {
+    /// <summary>
+    /// Change the background image in scene onclick
+    /// </summary>
+    /// <param name="currentScrollCell"></param>
     public void BackgroundButton(GameObject currentScrollCell)
     {
         GameObject Background = MapInteractions.Instance.gameObject;

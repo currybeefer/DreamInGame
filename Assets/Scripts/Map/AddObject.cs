@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/**
- * �����б��е���Ʒ��ť
- */
+/// <summary>
+/// Onlick event of object scroll cells
+/// </summary>
 public class AddObject : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /// <summary>
+    /// Change the temp image in scene onclick
+    /// </summary>
+    /// <param name="currentScrollCell"></param>
     public void AddObjectButton(GameObject currentScrollCell)
     {
 
