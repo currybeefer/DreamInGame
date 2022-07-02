@@ -36,17 +36,20 @@ public class EditGameSettings : MonoBehaviour
     /// </summary>
     public void SaveButton()
     {
-        if(GameTitle.text==""){
+        if (GameTitle.text == "")
+        {
             Warning.Instance.SetEmptyMessage("GameTitle");
             Warning.Instance.Show();
             return;
         }
-        if(GameTime.text==""){
+        if (GameTime.text == "")
+        {
             Warning.Instance.SetEmptyMessage("GameTime");
             Warning.Instance.Show();
             return;
         }
-        if(EndMessage.text==""){
+        if (EndMessage.text == "")
+        {
             Warning.Instance.SetEmptyMessage("Endmessage");
             Warning.Instance.Show();
             return;
@@ -71,39 +74,11 @@ public class EditGameSettings : MonoBehaviour
     /// <summary>
     /// Clear everything
     /// </summary>
-    public void ClearSettings(){
+    public void ClearSettings()
+    {
         GameTitle.text = "";
         EndMessage.text = "";
         GameTime.text = "";
 
-    }
-
-    /// <summary>
-    /// Upload data to backend
-    /// </summary>
-    /// <param name="url"></param>
-    /// <param name="jsonData"></param>
-    /// <returns></returns>
-    IEnumerator Upload(string url, string jsonData)
-    {
-        WWWForm form = new WWWForm();
-        Encoding encoding = Encoding.UTF8;
-        byte[] buffer = encoding.GetBytes(jsonData);
-        form.AddBinaryData("game", buffer);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(url,jsonData))
-        {
-            
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log("Form upload complete!");
-            }
-        }
     }
 }

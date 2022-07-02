@@ -2673,10 +2673,10 @@ MonoBehaviour:
   DraggingImage: {fileID: 21300000, guid: cfeeda20969d04a0ca8088b926b4fe57, type: 3}
   mapFilter: {fileID: 1957061171}
   objectFilter: {fileID: 2057790499}
-  curMapPath: 
   Tools: {fileID: 1497489452}
   ObjectType: -1
   ColliderSize: 32
+  curMapPath: 
   colliders: []
   objects: []
   objectInfoList: []

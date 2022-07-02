@@ -18,29 +18,10 @@ namespace EditorLogics
     /// </summary>
     public class Network
     {
-        public static void SaveDataJsonFile(MapData mapData,String jsonFilePath)
-        {
-            String jsonString = JsonMapper.ToJson(mapData);
-            String jsonFile = jsonFilePath;  
-            
-            File.WriteAllText(jsonFile, jsonString, System.Text.Encoding.UTF8);
-        }
-
-        public static String ReadJsonFile(String jsonFilePath)
-        {
-            //string jsonfile = "D://testJson.json";//JSON文件路径
- 
-            using (System.IO.StreamReader file = System.IO.File.OpenText(jsonFilePath))
-            {
-                using (JsonTextReader reader = new JsonTextReader(file))
-                {
-                    JObject o = (JObject)JToken.ReadFrom(reader);
-                    String jsonString = o.ToString();
-                    return jsonString;
-                }
-            }
-        }
-
+        /// <summary>
+        /// Create Http post
+        /// </summary>
+        /// <param name="jsonDataPost"></param>
         public static void SendJsonByHttpPost(String jsonDataPost)
         {
             //Debug.Log("测试Post");
@@ -54,7 +35,7 @@ namespace EditorLogics
         }
         
         /// <summary>
-        /// HTTPS Post请求
+        /// Handle Http post
         /// </summary>
         /// <param name="URL">访问地址</param>
         /// <param name="postBytes">携带数据</param>
