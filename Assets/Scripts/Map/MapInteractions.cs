@@ -185,7 +185,6 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
         objects.Clear();
         objectInfoList.Clear();
-        SetMap();
     }
 
     /// <summary>
@@ -250,7 +249,8 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         ObjectInfo curObjectInfo = new ObjectInfo();
         string path = "Objects/" + objectFilter.text +"/" +  curImage.sprite.name;
         curObjectInfo.SetImage(path);
-        curObjectInfo.SetMessage(Message.GetComponent<TMP_InputField>().text);
+        string m = String.Copy(Message.GetComponent<TMP_InputField>().text);
+        curObjectInfo.SetMessage(m);
         curObjectInfo.SetPosition(AddedObject.transform.localPosition);
         objectInfoList.Add(curObjectInfo);
         messageInput.text = "";
