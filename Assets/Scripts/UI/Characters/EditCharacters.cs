@@ -16,7 +16,7 @@ public class EditCharacters : MonoBehaviour
     //UI
     public GameObject CharactersUI;
     public GameObject CharacterUI;
-    public GameObject MapUI;
+    public GameObject LevelsUI;
     public GameObject CharacterTag;
     public GameObject Add;
 
@@ -61,7 +61,7 @@ public class EditCharacters : MonoBehaviour
     {
         CharactersUI.SetActive(false);
         CharacterUI.SetActive(false);
-        MapUI.SetActive(true);
+        LevelsUI.SetActive(true);
         EditorData.Instance.SetCharacterInfoList(CharacterInfoList);
     }
 

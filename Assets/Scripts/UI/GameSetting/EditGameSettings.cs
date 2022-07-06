@@ -15,7 +15,7 @@ using System.Text;
 /// </summary>
 public class EditGameSettings : MonoBehaviour
 {
-    public GameObject MapUI;
+    public GameObject LevelsUI;
     public GameObject GameUI;
     public TMP_InputField GameTitle;
     public TMP_InputField GameTime;
@@ -27,7 +27,7 @@ public class EditGameSettings : MonoBehaviour
     /// </summary>
     public void BackButton()
     {
-        MapUI.SetActive(true);
+        LevelsUI.SetActive(true);
         GameUI.SetActive(false);
     }
 
