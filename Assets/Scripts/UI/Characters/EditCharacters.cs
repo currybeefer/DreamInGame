@@ -10,8 +10,6 @@ using TMPro;
 /// </summary>
 public class EditCharacters : MonoBehaviour
 {
-    public static EditorData editorData;
-    public static MapData mapData;
 
     //UI
     public GameObject CharactersUI;
@@ -25,20 +23,17 @@ public class EditCharacters : MonoBehaviour
 
     //Infos
     public List<CharacterPanel> CharacterPanels;
+    public List<CharacterInfo> CharacterInfoList;
     [HideInInspector]
     public CharacterInfo curCharacter;
     [HideInInspector]
     public CharacterPanel curPanel;
-
-    public List<CharacterInfo> CharacterInfoList;
 
     
     private int maxCharacters = 6;
 
     void Start()
     {
-        editorData = new EditorData();
-        mapData = new MapData();
         CharacterPanels = new List<CharacterPanel>();
         CharacterInfoList = new List<CharacterInfo>();
         Vector3 pos = new Vector3(-300, 0, 0);
@@ -126,8 +121,7 @@ public class EditCharacters : MonoBehaviour
         if(CharacterPanels.Count < maxCharacters)
         {
             Add.SetActive(true);
-        }
-        
+        } 
     }
 
     /// <summary>

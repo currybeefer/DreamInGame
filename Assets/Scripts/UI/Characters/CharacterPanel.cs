@@ -34,7 +34,4 @@ public class CharacterPanel : MonoBehaviour
         EditCharacters editor = EditCharacters.Instance;
         editor.DeleteButton(this);
     }
-
-
-
 }

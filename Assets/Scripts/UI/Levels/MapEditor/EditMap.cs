@@ -76,8 +76,7 @@ public class EditMapLogic : MonoBehaviour
     /// </summary>
     public void BackButton()
     {
-        MapUI.SetActive(false);
-        CharacterUI.SetActive(true);
+        
     }
 
     /// <summary>
@@ -85,20 +84,6 @@ public class EditMapLogic : MonoBehaviour
     /// </summary>
     public void NextButton()
     {
-        MapUI.SetActive(false);
-        GameUI.SetActive(true);
-        SaveMapData();
-    }
-
-    /// <summary>
-    /// Save all map data
-    /// </summary>
-    private void SaveMapData()
-    {
-        MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
-        EditorData.Instance.map.SetCollideMap(mapInteractions.collideMap);
-        EditorData.Instance.map.SetCollideMapSize(mapInteractions.ColliderSize);
-        EditorData.Instance.map.SetObejcts(mapInteractions.objectInfoList);
-        EditorData.Instance.map.SetBackground(mapInteractions.curMapPath);
+        
     }
 }
