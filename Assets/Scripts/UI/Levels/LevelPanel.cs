@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class LevelPanel : MonoBehaviour
 {
+    public LevelInfo info;
+
+    private void Start()
+    {
+        info = new LevelInfo();
+    }
     public void OnClick()
     {
         EditLevels editor = EditLevels.Instance;
+        editor.curPanel = this;
         editor.SwitchToLevel();
     }
 
@@ -14,5 +21,10 @@ public class LevelPanel : MonoBehaviour
     {
         EditLevels editor = EditLevels.Instance;
         editor.DeleteButton(this);
+    }
+
+    public LevelInfo GetLevelInfo()
+    {
+        return info;
     }
 }

@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EditorLogics;
+using System;
 
-public class EditMap : MonoBehaviour
+/// <summary>
+/// UI logics of map editor
+/// </summary>
+public class EditMapLogic : MonoBehaviour
 {
     public GameObject LevelsUI;
     public GameObject MapEditorUI;
@@ -20,8 +25,7 @@ public class EditMap : MonoBehaviour
     /// <summary>
     /// Clear everything in map
     /// </summary>
-    public void ClearMap()
-    {
+    public void ClearMap(){
         MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
         Background.GetComponent<Image>().sprite = null;
         mapInteractions.OnEnable();

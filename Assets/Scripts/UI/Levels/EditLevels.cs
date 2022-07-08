@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EditorLogics;
 
 public class EditLevels : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class EditLevels : MonoBehaviour
 
     //Data
     public List<LevelPanel> LevelPanels;
-    public List<LevelInfo> LevelInfos;
     [HideInInspector]
     public LevelPanel curPanel;
 
@@ -24,18 +24,28 @@ public class EditLevels : MonoBehaviour
     //Constant
     private int maxLevels = 5;
 
-
-
     public void NextButton()
     {
         LevelsUI.SetActive(false);
         GameSettingUI.SetActive(true);
+        SaveData();
     }
 
     public void BackButton()
     {
         LevelsUI.SetActive(false);
         CharactersUI.SetActive(true);
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        List<LevelInfo> levelInfoList = new List<LevelInfo>();
+        for (int i = 0; i < LevelPanels.Count; i++)
+        {
+            levelInfoList.Add(LevelPanels[i].GetLevelInfo());
+        }
+        EditorData.Instance.SetLevelInfoList(levelInfoList);
     }
 
     public void SwitchToLevel()
@@ -49,35 +59,35 @@ public class EditLevels : MonoBehaviour
     /// </summary>
     public void AddButton()
     {
-        int idx = LevelPanels.Count;
-        Vector3 pos = new Vector3(-300, 0, 0);
-        pos.x += 120 * idx;
         GameObject cur = Instantiate(LevelTag, LevelsUI.transform);
-        cur.transform.localPosition = pos;
-        Vector3 addPos = new Vector3(-300 + 120 * (idx + 1), 0, 0);
-        Add.transform.localPosition = addPos;
         curPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
-        LevelPanels.Add(curPanel);
-        if (LevelPanels.Count >= maxLevels)
-        {
-            Add.SetActive(false);
-        }
         SwitchToLevel();
     }
 
     public void DeleteButton(LevelPanel panel)
     {
-        int idx = LevelPanels.IndexOf(panel);
-        //if (idx < LevelInfos.Count)
-        //{
-        //    LevelInfos.RemoveAt(idx);
-        //}
         LevelPanels.Remove(panel);
         Destroy(panel.gameObject);
         RePosition();
     }
 
-    public void RePosition()
+    public void FinishAdding()
+    {
+        if (!LevelPanels.Contains(curPanel)) {
+            LevelPanels.Add(curPanel);
+            RePosition();
+        }
+    }
+
+    public void CancelAdding()
+    {
+        if (!LevelPanels.Contains(curPanel))
+        {
+            Destroy(curPanel.gameObject);
+        }
+    }
+
+    private void RePosition()
     {
         for (int i = 0; i < LevelPanels.Count; i++)
         {
@@ -86,7 +96,11 @@ public class EditLevels : MonoBehaviour
         }
         Vector3 addPos = new Vector3(-300 + 120 * LevelPanels.Count, 0, 0);
         Add.transform.localPosition = addPos;
-        if (LevelPanels.Count < maxLevels)
+        if (LevelPanels.Count >= maxLevels)
+        {
+            Add.SetActive(false);
+        }
+        else
         {
             Add.SetActive(true);
         }

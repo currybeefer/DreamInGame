@@ -18,10 +18,7 @@ public class EditCharacters : MonoBehaviour
     public GameObject CharacterTag;
     public GameObject Add;
 
-    //Singleton
-    public static EditCharacters Instance;
-
-    //Infos
+    //Data
     public List<CharacterPanel> CharacterPanels;
     public List<CharacterInfo> CharacterInfoList;
     [HideInInspector]
@@ -29,7 +26,10 @@ public class EditCharacters : MonoBehaviour
     [HideInInspector]
     public CharacterPanel curPanel;
 
-    
+    //Singleton
+    public static EditCharacters Instance;
+
+    //Constant
     private int maxCharacters = 6;
 
     void Start()
