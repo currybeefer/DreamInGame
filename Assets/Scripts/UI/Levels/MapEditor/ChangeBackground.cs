@@ -14,12 +14,12 @@ public class ChangeBackground : MonoBehaviour
     /// <param name="currentScrollCell"></param>
     public void BackgroundButton(GameObject currentScrollCell)
     {
-        GameObject Background = MapInteractions.Instance.gameObject;
+        GameObject Background = EditMap.Instance.Background;
         Image BackgroundImage = Background.GetComponent<Image>();
         BackgroundImage.sprite = currentScrollCell.GetComponent<Image>().sprite;
         BackgroundImage.color = Color.white;
         BackgroundImage.rectTransform.sizeDelta = currentScrollCell.GetComponent<Image>().sprite.textureRect.size;
-        Background.GetComponent<MapInteractions>().SetMap();
-        MapInteractions.Instance.SaveMapPath(BackgroundImage.sprite.name);
+        EditMap.Instance.ClearMap();
+        EditMap.Instance.SaveBackgroundPath(BackgroundImage.sprite.name);
     }
 }

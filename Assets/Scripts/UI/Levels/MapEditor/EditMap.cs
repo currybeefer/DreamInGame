@@ -1,37 +1,78 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EditMap : MonoBehaviour
 {
+    //UI
     public GameObject LevelsUI;
+    public GameObject LevelUI;
     public GameObject MapEditorUI;
     public GameObject LevelSettingEditorUI;
+
     public GameObject MapLoopScroll;
     public GameObject ObjectLoopScroll;
     public GameObject CollideMap;
     public GameObject Background;
-    public GameObject Message;
+    public GameObject MessageEditor;
     public GameObject MapSelectBg;
     public GameObject ObjectSelectBg;
-    public GameObject mapButton;
 
-    /// <summary>
-    /// Clear everything in map
-    /// </summary>
-    public void ClearMap()
+    public GameObject Maps;
+    public TMP_Text mapFilter;
+    public TMP_Text ObjectFilter;
+    public GameObject TempImage;
+    public GameObject Message;
+    public GameObject LevelsEditor;
+
+    //Prefabs
+    public GameObject ColliderImage;
+    public GameObject ObjectPrefab;
+
+    //Data
+    [HideInInspector]
+    public List<GameObject> Objects;
+    public List<ObjectInfo> ObjectInfoList;
+    public List<GameObject> Colliders;
+    public bool[,] ColliderMap;
+    public string BackgroundPath;
+
+    //Constant
+    private int COLLIDER_SIZE = 32;
+
+    //Singleton
+    public static EditMap Instance;
+
+    void Awake()
     {
-        MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
-        Background.GetComponent<Image>().sprite = null;
-        mapInteractions.OnEnable();
-        mapInteractions.SetMap();
-        mapInteractions.SetToDrag();
-        ButtonGroup Options = mapButton.transform.parent.GetComponent<ButtonGroup>();
-        MapButton();
-        Options.Select(mapButton);
+        if (Instance == null || Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
     }
 
+    private void Start()
+    {
+        Objects = new List<GameObject>();
+        ObjectInfoList = new List<ObjectInfo>();
+        Colliders = new List<GameObject>();
+        InitializeColliderMap();
+    }
+
+    public void OnEnable()
+    {
+        Image BackgroundImage = Background.GetComponent<Image>();
+        if (BackgroundImage.sprite == null)
+        {
+            ChangeBackground selected = Maps.GetComponentInChildren<ChangeBackground>();
+            selected.BackgroundButton(selected.gameObject);
+        }
+    }
+
+    #region Buttons
     /// <summary>
     /// Switch to map scroll view
     /// </summary>
@@ -40,7 +81,7 @@ public class EditMap : MonoBehaviour
         MapLoopScroll.SetActive(true);
         CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(false);
-        Message.SetActive(false);
+        MessageEditor.SetActive(false);
         MapSelectBg.SetActive(true);
         ObjectSelectBg.SetActive(false);
     }
@@ -53,7 +94,7 @@ public class EditMap : MonoBehaviour
         MapLoopScroll.SetActive(false);
         CollideMap.SetActive(false);
         ObjectLoopScroll.SetActive(true);
-        Message.SetActive(true);
+        MessageEditor.SetActive(true);
         MapSelectBg.SetActive(false);
         ObjectSelectBg.SetActive(true);
     }
@@ -71,9 +112,8 @@ public class EditMap : MonoBehaviour
     /// </summary>
     public void BackButton()
     {
-        EditLevels editor = EditLevels.Instance;
-        editor.CancelAdding();
-        MapEditorUI.SetActive(false);
+        LevelsEditor.GetComponent<EditLevels>().CancelAdding();
+        LevelUI.SetActive(false);
         LevelsUI.SetActive(true);
     }
 
@@ -85,4 +125,108 @@ public class EditMap : MonoBehaviour
         MapEditorUI.SetActive(false);
         LevelSettingEditorUI.SetActive(true);
     }
+
+    #endregion
+
+    #region Data
+    public void InitializeColliderMap()
+    {
+        Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
+        ColliderMap = new bool[Mathf.CeilToInt(map_size.y / COLLIDER_SIZE), Mathf.CeilToInt(map_size.x / COLLIDER_SIZE)];
+    }
+
+    public void ClearMap()
+    {
+        foreach (GameObject col in Colliders)
+        {
+            Destroy(col);
+        }
+        Colliders.Clear();
+        InitializeColliderMap();
+        foreach (GameObject obj in Objects)
+        {
+            Destroy(obj);
+        }
+        Objects.Clear();
+        ObjectInfoList.Clear();
+    }
+
+    public void SaveBackgroundPath(string name)
+    {
+        BackgroundPath = "Maps/" + mapFilter.text + "/" + name;
+    }
+
+    public void AddCollider()
+    {
+        Vector3 mousePos = TempImage.transform.localPosition;
+        Vector3 mapPos = GetMapPosition();
+        float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
+        int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / COLLIDER_SIZE);
+        int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / COLLIDER_SIZE);
+
+        float posOfWidth = -mapWidth / 2 + indexOfWidth * COLLIDER_SIZE + COLLIDER_SIZE / 2;
+        float posOfHeight = mapHeight / 2 - indexOfHeight * COLLIDER_SIZE - COLLIDER_SIZE / 2;
+
+        GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
+        AddedObject.transform.localPosition = new Vector2(posOfWidth, posOfHeight);
+        Colliders.Add(AddedObject);
+        ColliderMap[indexOfHeight, indexOfWidth] = true;
+    }
+
+    public void RemoveCollider(GameObject collider)
+    {
+        Vector3 mousePos = TempImage.transform.localPosition;
+        Vector3 mapPos = GetMapPosition();
+        float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
+        int indexOfWidth = Mathf.FloorToInt(Math.Abs(mousePos.x - (mapPos.x - mapWidth / 2)) / COLLIDER_SIZE);
+        int indexOfHeight = Mathf.FloorToInt(Math.Abs(mousePos.y - (mapPos.y + mapHeight / 2)) / COLLIDER_SIZE);
+
+        Colliders.Remove(collider);
+        ColliderMap[indexOfHeight, indexOfWidth] = false;
+    }
+
+    public void AddObject()
+    {
+        Image curImage = TempImage.GetComponent<Image>();
+        GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
+        AddedObject.transform.position = TempImage.transform.position;
+        AddedObject.GetComponent<Image>().sprite = curImage.sprite;
+        AddedObject.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(curImage.sprite.texture.width, curImage.sprite.texture.height);
+        TMP_InputField messageInput = Message.GetComponent<TMP_InputField>();
+        AddedObject.GetComponent<ObjectScript>().message = messageInput.text;
+        Objects.Add(AddedObject);
+
+        ObjectInfo curObjectInfo = new ObjectInfo();
+        string path = "Objects/" + ObjectFilter.text + "/" + curImage.sprite.name;
+        curObjectInfo.SetImage(path);
+        string m = String.Copy(Message.GetComponent<TMP_InputField>().text);
+        curObjectInfo.SetMessage(m);
+        curObjectInfo.SetPosition(AddedObject.transform.localPosition);
+        ObjectInfoList.Add(curObjectInfo);
+        messageInput.text = "";
+    }
+
+    public void RemoveObject(GameObject obj)
+    {
+        int idx = Objects.IndexOf(obj);
+        Objects.RemoveAt(idx);
+        ObjectInfoList.RemoveAt(idx);
+    }
+
+    private Vector3 GetMapPosition()
+    {
+        return Background.transform.localPosition;
+    }
+
+    private float GetMapWidth()
+    {
+        return Background.GetComponent<RectTransform>().rect.width;
+    }
+
+    private float GetMapHeight()
+    {
+        return Background.GetComponent<RectTransform>().rect.height;
+    }
+
+    #endregion
 }

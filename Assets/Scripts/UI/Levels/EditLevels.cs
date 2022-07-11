@@ -14,7 +14,7 @@ public class EditLevels : MonoBehaviour
     public GameObject Add;
 
     //Data
-    public List<LevelPanel> LevelPanels;
+    public List<LevelPanel> LevelPanels = new List<LevelPanel>();
     [HideInInspector]
     public LevelPanel curPanel;
 
@@ -24,21 +24,28 @@ public class EditLevels : MonoBehaviour
     //Constant
     private int maxLevels = 5;
 
+    void Awake()
+    {
+        if (Instance == null || Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
+    }
+
     public void NextButton()
     {
         LevelsUI.SetActive(false);
         GameSettingUI.SetActive(true);
-        SaveData();
     }
 
     public void BackButton()
     {
         LevelsUI.SetActive(false);
         CharactersUI.SetActive(true);
-        SaveData();
     }
 
-    private void SaveData()
+    public void SaveData()
     {
         List<LevelInfo> levelInfoList = new List<LevelInfo>();
         for (int i = 0; i < LevelPanels.Count; i++)
@@ -73,10 +80,12 @@ public class EditLevels : MonoBehaviour
 
     public void FinishAdding()
     {
-        if (!LevelPanels.Contains(curPanel)) {
+        if (!LevelPanels.Contains(curPanel))
+        {
             LevelPanels.Add(curPanel);
             RePosition();
         }
+        Debug.Log(curPanel.GetLevelInfo().ToString());
     }
 
     public void CancelAdding()

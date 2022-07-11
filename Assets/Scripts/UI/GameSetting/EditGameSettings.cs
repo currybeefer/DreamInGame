@@ -48,6 +48,9 @@ public class EditGameSettings : MonoBehaviour
             Warning.Instance.Show();
             return;
         }
+
+        EditCharacters.Instance.SaveData();
+        EditLevels.Instance.SaveData();
         EditorData data = EditorData.Instance;
         data.SetName(GameTitle.text);
         data.SetEnd(EndMessage.text);

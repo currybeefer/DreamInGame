@@ -2942,7 +2942,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 42.000244}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &271430192
 MonoBehaviour:
@@ -3083,22 +3083,12 @@ MonoBehaviour:
   Background: {fileID: 274828760}
   CollideMap: {fileID: 1909702796}
   TempImage: {fileID: 1402471913}
-  ObjectPrefab: {fileID: 6769360498833883768, guid: bf2ba8537c121d549a744ef9d75bd44f, type: 3}
   ColliderImage: {fileID: 1790597903611494058, guid: 1121cff893dfc6143a1b9028af16dd6f, type: 3}
-  Message: {fileID: 1176201957}
-  Maps: {fileID: 271430190}
   EraserImage: {fileID: 21300000, guid: 4d1ba6502fed84e07b852645e34718b7, type: 3}
   RotationImage: {fileID: 21300000, guid: 8545c8e0e9acd436d99ac14055e433d1, type: 3}
   DraggingImage: {fileID: 21300000, guid: cfeeda20969d04a0ca8088b926b4fe57, type: 3}
-  mapFilter: {fileID: 1957061171}
-  objectFilter: {fileID: 2057790499}
   Tools: {fileID: 1497489452}
   ObjectType: -1
-  ColliderSize: 32
-  curMapPath: 
-  colliders: []
-  objects: []
-  objectInfoList: []
 --- !u!1 &276450036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3641,8 +3631,8 @@ RectTransform:
   m_Father: {fileID: 1595353088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9874,8 +9864,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EditMapLogic, Assembly-CSharp
+      - m_Target: {fileID: 2056960903}
+        m_TargetAssemblyTypeName: EditMap, Assembly-CSharp
         m_MethodName: CollideButton
         m_Mode: 1
         m_Arguments:
@@ -9972,7 +9962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1015011108
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10746,19 +10736,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 260005576}
+      objectReference: {fileID: 1377421798}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SaveButton
       objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EditGameSettings, Assembly-CSharp
+      value: EditLevelSetting, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4192179058284058230, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_Pivot.x
@@ -11904,7 +11906,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -11913,7 +11915,7 @@ PrefabInstance:
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 260005576}
+      objectReference: {fileID: 1377421798}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -11924,7 +11926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EditGameSettings, Assembly-CSharp
+      value: EditLevelSetting, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1922744736154794050, guid: dd342f5d70c56437fb81603ff9b95ff4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -12260,6 +12262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1377421797}
+  - component: {fileID: 1377421798}
   m_Layer: 5
   m_Name: SettingEditor
   m_TagString: Untagged
@@ -12292,6 +12295,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 860, y: 439.86755}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1377421798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377421796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dfe9f48a5d3f9240874a334369feeb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelsUI: {fileID: 1474238234}
+  LevelUI: {fileID: 1015011107}
+  MapEditorUI: {fileID: 2056960901}
+  GameSettingEditorUI: {fileID: 1377421796}
+  Title: {fileID: 1413665462}
+  Duration: {fileID: 2097923158}
+  Summary: {fileID: 2059083930}
+  LevelsEditor: {fileID: 153682275}
 --- !u!1 &1402471913
 GameObject:
   m_ObjectHideFlags: 0
@@ -15476,7 +15499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1880909152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17225,17 +17248,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0f19eb4e147fd42bdd0a2bc8bbc4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelsUI: {fileID: 1015011107}
+  LevelsUI: {fileID: 1474238234}
+  LevelUI: {fileID: 1015011107}
   MapEditorUI: {fileID: 2056960901}
   LevelSettingEditorUI: {fileID: 1377421796}
   MapLoopScroll: {fileID: 1020313402}
   ObjectLoopScroll: {fileID: 1519119869}
   CollideMap: {fileID: 1909702796}
   Background: {fileID: 274828760}
-  Message: {fileID: 682402788}
+  MessageEditor: {fileID: 682402788}
   MapSelectBg: {fileID: 681611170}
   ObjectSelectBg: {fileID: 529379421}
-  mapButton: {fileID: 1455583678}
+  Maps: {fileID: 271430190}
+  mapFilter: {fileID: 1957061171}
+  ObjectFilter: {fileID: 2057790499}
+  TempImage: {fileID: 1402471913}
+  Message: {fileID: 1176201957}
+  LevelsEditor: {fileID: 153682275}
+  ColliderImage: {fileID: 1790597903611494058, guid: 1121cff893dfc6143a1b9028af16dd6f, type: 3}
+  ObjectPrefab: {fileID: 6769360498833883768, guid: bf2ba8537c121d549a744ef9d75bd44f, type: 3}
+  Objects: []
+  ObjectInfoList: []
+  Colliders: []
+  BackgroundPath: 
 --- !u!1 &2057790497
 GameObject:
   m_ObjectHideFlags: 0

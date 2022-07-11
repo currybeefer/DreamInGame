@@ -32,7 +32,7 @@ public class ObjectScript : MonoBehaviour, IPointerClickHandler
     /// Destroy this object
     /// </summary>
     private void Remove(){
-        MapInteractions.Instance.RemoveObject(gameObject);
+        EditMap.Instance.RemoveObject(gameObject);
         Destroy(gameObject, 0);
     }
 

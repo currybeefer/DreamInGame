@@ -19,7 +19,7 @@ public class ColliderScript : MonoBehaviour, IPointerClickHandler
         {
             if (CurrentObject.transform.parent.parent.GetChild(0).GetComponent<MapInteractions>().ObjectType == 1)
             {
-                CurrentObject.transform.parent.parent.GetChild(0).GetComponent<MapInteractions>().RemoveCollider(CurrentObject);
+                EditMap.Instance.RemoveCollider(CurrentObject);
                 Destroy(CurrentObject);
             }
         }

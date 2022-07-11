@@ -15,12 +15,13 @@ public class AddObject : MonoBehaviour
     public void AddObjectButton(GameObject currentScrollCell)
     {
 
-        GameObject Temp = MapInteractions.Instance.TempImage;
+        GameObject Temp = EditMap.Instance.TempImage;
         Image TempImage = Temp.GetComponent<Image>();
         TempImage.sprite = currentScrollCell.transform.GetChild(0).GetComponent<Image>().sprite;
         TempImage.color = Color.white;
         Texture tex = currentScrollCell.transform.GetChild(0).GetComponent<Image>().sprite.texture;
         TempImage.rectTransform.sizeDelta = new Vector2(tex.width, tex.height);
+
         MapInteractions.Instance.ObjectType = 0;
         MapInteractions.Instance.Tools.SelectNone();
     }

@@ -28,8 +28,6 @@ public class EditMapLogic : MonoBehaviour
     public void ClearMap(){
         MapInteractions mapInteractions = Background.GetComponent<MapInteractions>();
         Background.GetComponent<Image>().sprite = null;
-        mapInteractions.OnEnable();
-        mapInteractions.SetMap();
         mapInteractions.SetToDrag();
         ButtonGroup Options = mapButton.transform.parent.GetComponent<ButtonGroup>();
         MapButton();

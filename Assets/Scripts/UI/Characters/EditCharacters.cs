@@ -57,6 +57,10 @@ public class EditCharacters : MonoBehaviour
         CharactersUI.SetActive(false);
         CharacterUI.SetActive(false);
         LevelsUI.SetActive(true);
+    }
+
+    public void SaveData()
+    {
         EditorData.Instance.SetCharacterInfoList(CharacterInfoList);
     }
 
