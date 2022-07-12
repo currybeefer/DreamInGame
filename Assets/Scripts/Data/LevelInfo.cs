@@ -27,9 +27,19 @@ public class LevelInfo {
         title_ = title;
     }
 
+    public string GetTitle()
+    {
+        return title_;
+    }
+
     public void SetDuration(int duration)
     {
         duration_ = duration;
+    }
+
+    public int GetDuration()
+    {
+        return duration_;
     }
 
     public void SetSummary(string summary)
@@ -37,9 +47,19 @@ public class LevelInfo {
         end_ = summary;
     }
 
+    public string GetSummary()
+    {
+        return end_;
+    }
+
     public void SetBackground(string background)
     {
         background_ = background;
+    }
+
+    public string GetBackground()
+    {
+        return background_;
     }
 
     public void SetObejcts(List<ObjectInfo> objects)
@@ -47,9 +67,19 @@ public class LevelInfo {
         objects_ = new List<ObjectInfo>(objects);
     }
 
+    public List<ObjectInfo> GetObjects()
+    {
+        return objects_;
+    }
+
     public void SetCollideMap(bool[,] collideMap)
     {
-        collideMap_ = collideMap;
+        collideMap_ = (bool[,])collideMap.Clone();
+    }
+
+    public bool[,] GetCollideMap()
+    {
+        return collideMap_;
     }
 
     public override string ToString()

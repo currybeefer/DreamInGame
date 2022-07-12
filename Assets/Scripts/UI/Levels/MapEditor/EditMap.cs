@@ -6,6 +6,7 @@ using TMPro;
 
 public class EditMap : MonoBehaviour
 {
+    #region Variables
     //UI
     public GameObject LevelsUI;
     public GameObject LevelUI;
@@ -45,6 +46,9 @@ public class EditMap : MonoBehaviour
     //Singleton
     public static EditMap Instance;
 
+    #endregion
+
+    #region Cycle
     void Awake()
     {
         if (Instance == null || Instance != this)
@@ -71,6 +75,7 @@ public class EditMap : MonoBehaviour
             selected.BackgroundButton(selected.gameObject);
         }
     }
+    #endregion
 
     #region Buttons
     /// <summary>
@@ -149,6 +154,11 @@ public class EditMap : MonoBehaviour
         }
         Objects.Clear();
         ObjectInfoList.Clear();
+    }
+
+    public void FillMap(string backgroundPath, List<ObjectInfo> ObjectInfoList, bool[,] ColliderMap)
+    {
+        //TODO : 把背景，物品，碰撞填补回地图编辑器中
     }
 
     public void SaveBackgroundPath(string name)

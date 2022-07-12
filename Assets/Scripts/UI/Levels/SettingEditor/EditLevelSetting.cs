@@ -18,6 +18,18 @@ public class EditLevelSetting : MonoBehaviour
 
     public GameObject LevelsEditor;
 
+    //Singleton
+    public static EditLevelSetting Instance;
+
+    void Awake()
+    {
+        if (Instance == null || Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
+    }
+
     #region Buttons
     public void BackButton()
     {
@@ -67,7 +79,22 @@ public class EditLevelSetting : MonoBehaviour
 
         //Clear Data
         map.ClearMap();
+        ClearSettings();
     }
 
     #endregion
+
+    public void ClearSettings()
+    {
+        Title.text = "";
+        Duration.text = "";
+        Summary.text = "";
+    }
+
+    public void FillSettings(string title, int duration, string summary)
+    {
+        Title.text = title;
+        Duration.text = duration.ToString();
+        Summary.text = summary;
+    }
 }

@@ -19,7 +19,8 @@ public class LevelPanel : MonoBehaviour
         editor.curPanel = this;
         editor.SwitchToLevel();
 
-        //TODO : 将数据添加回levelEditor里
+        EditLevelSetting.Instance.FillSettings(info.GetTitle(), info.GetDuration(), info.GetSummary());
+        EditMap.Instance.FillMap(info.GetBackground(), info.GetObjects(), info.GetCollideMap());
     }
 
     public void Delete()
