@@ -21,6 +21,18 @@ public class EditGameSettings : MonoBehaviour
     public TMP_InputField EndMessage;
     public GameObject FinishPage;
 
+    //Singleton
+    public static EditGameSettings Instance;
+
+    void Awake()
+    {
+        if (Instance == null || Instance != this)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
+    }
+
     /// <summary>
     /// Move back to map editor
     /// </summary>

@@ -69,7 +69,15 @@ public class EditLevels : MonoBehaviour
         GameObject cur = Instantiate(LevelTag, LevelsUI.transform);
         curPanel = cur.GetComponent(typeof(LevelPanel)) as LevelPanel;
         SwitchToLevel();
+        if(EditGameSettings.Instance != null){
+            EditGameSettings.Instance.ClearSettings();
+        }
+        if(EditMap.Instance != null){
+            EditMap.Instance.ResetMap();
+        }
+        
     }
+    
 
     public void DeleteButton(LevelPanel panel)
     {

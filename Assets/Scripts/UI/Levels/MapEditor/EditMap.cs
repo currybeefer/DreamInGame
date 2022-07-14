@@ -77,6 +77,13 @@ public class EditMap : MonoBehaviour
     }
     #endregion
 
+    public void ResetMap(){
+        Image BackgroundImage = Background.GetComponent<Image>();
+        BackgroundImage.sprite = null;
+        OnEnable();
+        ClearMap();
+    }
+
     #region Buttons
     /// <summary>
     /// Switch to map scroll view
@@ -156,9 +163,45 @@ public class EditMap : MonoBehaviour
         ObjectInfoList.Clear();
     }
 
-    public void FillMap(string backgroundPath, List<ObjectInfo> ObjectInfoList, bool[,] ColliderMap)
+    public void FillMap(string background, List<ObjectInfo> fillObjects, bool[,] fillColliders)
     {
-        //TODO : °Ñ±³¾°£¬ÎïÆ·£¬Åö×²Ìî²¹»ØµØÍ¼±à¼­Æ÷ÖÐ
+        //TODO : ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½×²ï¿½î²¹ï¿½Øµï¿½Í¼ï¿½à¼­ï¿½ï¿½ï¿½ï¿½
+        Sprite bg = Resources.Load<Sprite>(background);
+        Image BackgroundImage = Background.GetComponent<Image>();
+        BackgroundImage.sprite = bg;
+        BackgroundImage.color = Color.white;
+        BackgroundImage.rectTransform.sizeDelta = bg.textureRect.size;
+        EditMap.Instance.ClearMap();
+        EditMap.Instance.SaveBackgroundPath(BackgroundImage.sprite.name);
+
+        ColliderMap = fillColliders;
+        ObjectInfoList = fillObjects;
+        FillColliders(fillColliders);
+
+    }
+
+    private void FillObject(ObjectInfo info){
+
+
+    }
+
+    private void FillColliders(bool[,] fillColliders){
+        float mapWidth = GetMapWidth(), mapHeight = GetMapHeight();
+        for (int i = 0; i < fillColliders.GetLength(0); i++){
+
+            for (int j = 0; j < fillColliders.GetLength(1); j++){
+                if(fillColliders[i,j]){
+                    float posOfWidth = -mapWidth / 2 + j * COLLIDER_SIZE + COLLIDER_SIZE / 2;
+                    float posOfHeight = mapHeight / 2 - i * COLLIDER_SIZE - COLLIDER_SIZE / 2;
+                    GameObject AddedObject = Instantiate(ColliderImage, CollideMap.transform);
+                    AddedObject.transform.localPosition = new Vector2(posOfWidth, posOfHeight);
+                    Colliders.Add(AddedObject);
+                }
+
+            
+            }
+        }
+
     }
 
     public void SaveBackgroundPath(string name)

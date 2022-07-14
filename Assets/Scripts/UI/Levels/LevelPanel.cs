@@ -9,10 +9,6 @@ public class LevelPanel : MonoBehaviour
     public TMP_Text Title;
     public TMP_Text Duration;
 
-    private void Start()
-    {
-        info = new LevelInfo();
-    }
     public void OnClick()
     {
         EditLevels editor = EditLevels.Instance;
