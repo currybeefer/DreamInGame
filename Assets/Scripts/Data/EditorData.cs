@@ -45,9 +45,10 @@ namespace EditorLogics
                 levelInfoStr = levelInfoStr.Substring(0, levelInfoStr.Length - 1);
             }
 
-            string nameWithNumOfPlayer = name + "," + CharacterInfoList.Count.ToString();
-            String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"end\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", nameWithNumOfPlayer, end, levelInfoStr,
+            string numOfPlayer = CharacterInfoList.Count.ToString();
+            String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
                 characterInfoStr) + "}";
+            String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"infos\": {2}", name, numOfPlayer, gameDataStr) + "}";
             return editorDataStr;
         }
 

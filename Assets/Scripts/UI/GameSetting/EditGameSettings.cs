@@ -64,17 +64,28 @@ public class EditGameSettings : MonoBehaviour
         EditCharacters.Instance.SaveData();
         EditLevels.Instance.SaveData();
         EditorData data = EditorData.Instance;
+
+        if (data.CharacterInfoList.Count == 0)
+        {
+            Warning.Instance.SetEmptyMessage("Character");
+            Warning.Instance.Show();
+            return;
+        }
+
+        if (data.LevelInfoList.Count == 0)
+        {
+            Warning.Instance.SetEmptyMessage("Level");
+            Warning.Instance.Show();
+            return;
+        }
+
         data.SetName(GameTitle.text);
         data.SetEnd(EndMessage.text);
         string dataJsonStr = data.ToString();
         dataJsonStr = dataJsonStr.Replace("\n", "\\n");
-        print(dataJsonStr);
-        //String jsonFilePath = "D:/DreamInGame/test.json";
-        //File.WriteAllText(jsonFilePath, dataJsonStr, System.Text.Encoding.UTF8);
+        Debug.Log(dataJsonStr);
 
         //EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
-        //string url = "https://api.dreamin.land/game_info_post/";
-        //StartCoroutine(Upload(url, dataJsonStr));
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
     }

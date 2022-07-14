@@ -9052,7 +9052,7 @@ PrefabInstance:
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 153682276}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -9091,7 +9091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ClearMap
+      value: ClearLevels
       objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -9111,7 +9111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: EditMapLogic, Assembly-CSharp
+      value: EditLevels, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2482486731700531827, guid: cf853164c6ad54455833df056ae0c72d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName

@@ -105,8 +105,8 @@ public class LevelInfo {
         {
             objectsStr = objectsStr.Substring(0, objectsStr.Length - 1);
         }
-        String levelStr = "{" + string.Format("\"title\": \"{0}\",\"duration\": \"{1}\",\"end\": \"{2}\",\"background\": \"{3}\",\"collide_map\": \"{4}\",\"object\": [{5}]", title_, duration_, end_, background_,
-                collideMapStr, objectsStr) + "}";
+        String levelStr = string.Format("\"title\": \"{0}\",\"duration\": \"{1}\",\"end\": \"{2}\",\"background\": \"{3}\",\"collide_map\": \"{4}\",\"object\": [{5}]", title_, duration_, end_, background_,
+                collideMapStr, objectsStr);
 
         return levelStr;
     }

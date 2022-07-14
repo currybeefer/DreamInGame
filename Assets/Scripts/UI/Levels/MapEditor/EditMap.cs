@@ -77,13 +77,6 @@ public class EditMap : MonoBehaviour
     }
     #endregion
 
-    public void ResetMap(){
-        Image BackgroundImage = Background.GetComponent<Image>();
-        BackgroundImage.sprite = null;
-        OnEnable();
-        ClearMap();
-    }
-
     #region Buttons
     /// <summary>
     /// Switch to map scroll view
@@ -145,6 +138,14 @@ public class EditMap : MonoBehaviour
     {
         Vector2 map_size = Background.GetComponent<Image>().rectTransform.sizeDelta;
         ColliderMap = new bool[Mathf.CeilToInt(map_size.y / COLLIDER_SIZE), Mathf.CeilToInt(map_size.x / COLLIDER_SIZE)];
+    }
+
+    public void ResetMap()
+    {
+        Image BackgroundImage = Background.GetComponent<Image>();
+        BackgroundImage.sprite = null;
+        OnEnable();
+        ClearMap();
     }
 
     public void ClearMap()
