@@ -118,6 +118,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public void SetToNormal(){
         ObjectType = -1;
         ClearTempImage();
+        CollideMap.SetActive(false);
     }
 
     /// <summary>
@@ -140,6 +141,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TempImage.GetComponent<Image>().sprite = EraserImage;
         TempImage.GetComponent<Image>().color = Color.white;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+        CollideMap.SetActive(false);
 
     }
 
@@ -148,6 +150,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TempImage.GetComponent<Image>().sprite = RotationImage;
         TempImage.GetComponent<Image>().color = Color.white;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+        CollideMap.SetActive(false);
     }
 
     public void SetToDrag(){
@@ -155,6 +158,7 @@ public class MapInteractions : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         TempImage.GetComponent<Image>().sprite = DraggingImage;
         TempImage.GetComponent<Image>().color = Color.white;
         TempImage.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+        CollideMap.SetActive(false);
     }
 
     #endregion

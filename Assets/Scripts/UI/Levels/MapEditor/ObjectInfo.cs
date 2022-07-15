@@ -9,6 +9,7 @@ public class ObjectInfo
     private string image_;
     private string position_;
     private string message_;
+    private Vector3 originPos_;
 
     public ObjectInfo()
     {
@@ -34,6 +35,10 @@ public class ObjectInfo
         return position_;
     }
 
+    public Vector3 GetOriginPos(){
+        return originPos_;
+    }
+
     public string GetMessage()
     {
         return message_;
@@ -46,6 +51,7 @@ public class ObjectInfo
     
     public void SetPosition(Vector3 position)
     {
+        originPos_ = position;
         position_ = "[" + position.x + "," + position.y + "," + position.z + "]";
     }
 

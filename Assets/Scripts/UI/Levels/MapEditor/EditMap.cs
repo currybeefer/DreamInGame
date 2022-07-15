@@ -178,12 +178,21 @@ public class EditMap : MonoBehaviour
         ColliderMap = fillColliders;
         ObjectInfoList = fillObjects;
         FillColliders(fillColliders);
+        foreach(ObjectInfo obj in fillObjects){
+            FillObject(obj);
+        }
+
 
     }
 
     private void FillObject(ObjectInfo info){
-
-
+        Sprite img = Resources.Load<Sprite>(info.GetImage());
+        GameObject AddedObject = Instantiate(ObjectPrefab, Background.transform);
+        AddedObject.transform.localPosition = info.GetOriginPos();
+        AddedObject.GetComponent<Image>().sprite = img;
+        AddedObject.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(img.texture.width, img.texture.height);
+        AddedObject.GetComponent<ObjectScript>().message = info.GetMessage();
+        Objects.Add(AddedObject);
     }
 
     private void FillColliders(bool[,] fillColliders){
