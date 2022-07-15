@@ -46,7 +46,7 @@ namespace EditorLogics
             }
 
             string numOfPlayer = CharacterInfoList.Count.ToString();
-            String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"map\": [{2}],\"character\": [{3}]", name, numOfPlayer, levelInfoStr,
+            String gameDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"final\": \"{2}\",\"map\": [{3}],\"character\": [{4}]", name, numOfPlayer, end, levelInfoStr,
                 characterInfoStr) + "}";
             String editorDataStr = "{" + string.Format("\"name\": \"{0}\",\"players_num\": \"{1}\",\"infos\": {2}", name, numOfPlayer, gameDataStr) + "}";
             return editorDataStr;
