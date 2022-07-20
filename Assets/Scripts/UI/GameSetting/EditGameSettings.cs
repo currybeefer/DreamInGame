@@ -85,6 +85,9 @@ public class EditGameSettings : MonoBehaviour
         dataJsonStr = dataJsonStr.Replace("\n", "\\n");
         Debug.Log(dataJsonStr);
 
+        string savePath = "Assets/GameData.json";
+        File.WriteAllText(savePath, dataJsonStr);
+
         EditorLogics.Network.SendJsonByHttpPost(dataJsonStr);
         GameUI.SetActive(false);
         FinishPage.SetActive(true);
